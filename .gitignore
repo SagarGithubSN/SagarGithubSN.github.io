@@ -1,0 +1,18 @@
+node_modules/
+.next/
+out/
+.DS_Store
+.env*
+next-env.d.ts
+tsconfig.tsbuildinfo
+
+# Enquiry storage — never commit real enquiry data.
+data/
+!.env.example
+
+# Verification builds (NEXT_DIST_DIR=.next-build)
+.next-build/
+
+# Image research archive — originals kept locally for re-cropping and art-direction
+# changes. 165MB; not deployed. See IMAGE_ASSET_MANIFEST.md.
+public/images/research/

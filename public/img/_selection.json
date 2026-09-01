@@ -1,0 +1,482 @@
+[
+  {
+    "research": "agro/ginger-02.jpg",
+    "file": "agro-ginger.webp",
+    "alt": "Freshly lifted ginger rhizomes",
+    "srcW": 1920,
+    "srcH": 2560,
+    "outW": 1920,
+    "outH": 2560,
+    "bytes": 459342
+  },
+  {
+    "research": "agro/okra-01.png",
+    "file": "agro-okra.webp",
+    "alt": "Fresh okra pods, or ladyfinger",
+    "srcW": 2500,
+    "srcH": 1667,
+    "outW": 2400,
+    "outH": 1600,
+    "bytes": 258476
+  },
+  {
+    "research": "agro/beans-04.jpg",
+    "file": "agro-beans.webp",
+    "alt": "Fresh green beans after picking",
+    "srcW": 1920,
+    "srcH": 1280,
+    "outW": 1920,
+    "outH": 1280,
+    "bytes": 249212
+  },
+  {
+    "research": "agro/chilli-red-03.jpg",
+    "file": "agro-chilli.webp",
+    "alt": "Red chillies spread to dry in the sun",
+    "srcW": 1200,
+    "srcH": 629,
+    "outW": 1200,
+    "outH": 629,
+    "bytes": 351792
+  },
+  {
+    "research": "agro/chilli-green-02.jpg",
+    "file": "agro-chilli-green.webp",
+    "alt": "Fresh green chillies",
+    "srcW": 2772,
+    "srcH": 2094,
+    "outW": 2000,
+    "outH": 1511,
+    "bytes": 73198
+  },
+  {
+    "research": "agro/drumstick-04.jpg",
+    "file": "agro-drumstick.webp",
+    "alt": "Fresh drumstick, or moringa, pods",
+    "srcW": 2000,
+    "srcH": 1333,
+    "outW": 2000,
+    "outH": 1333,
+    "bytes": 110906
+  },
+  {
+    "research": "agro/mixed-01.jpg",
+    "file": "agro-harvest.webp",
+    "alt": "Mixed fresh vegetables after harvest",
+    "srcW": 2560,
+    "srcH": 1702,
+    "outW": 2400,
+    "outH": 1596,
+    "bytes": 365810
+  },
+  {
+    "research": "agro/grading-01.jpg",
+    "file": "agro-grading.webp",
+    "alt": "Produce being sorted and graded on a packing line",
+    "srcW": 1555,
+    "srcH": 1036,
+    "outW": 1555,
+    "outH": 1036,
+    "bytes": 223132
+  },
+  {
+    "research": "areca/palm-01.jpg",
+    "file": "areca-palm.webp",
+    "alt": "An areca palm plantation",
+    "srcW": 3060,
+    "srcH": 4080,
+    "outW": 2400,
+    "outH": 3200,
+    "bytes": 1906892
+  },
+  {
+    "research": "areca/sheath-fallen-01.jpg",
+    "file": "areca-sheath.webp",
+    "alt": "An areca leaf sheath lying where it fell",
+    "srcW": 2560,
+    "srcH": 1920,
+    "outW": 2400,
+    "outH": 1800,
+    "bytes": 1315712
+  },
+  {
+    "research": "areca/soaking-02.jpg",
+    "file": "areca-sheath-hand.webp",
+    "alt": "A collected areca sheath held in the hand",
+    "srcW": 2560,
+    "srcH": 1920,
+    "outW": 2000,
+    "outH": 1500,
+    "bytes": 1001472
+  },
+  {
+    "research": "areca/die-01.webp",
+    "file": "areca-die.webp",
+    "alt": "A shaped metal die used to press areca sheath into tableware",
+    "srcW": 1600,
+    "srcH": 1717,
+    "outW": 1600,
+    "outH": 1717,
+    "bytes": 142030
+  },
+  {
+    "research": "areca/press-02.jpg",
+    "file": "areca-press.webp",
+    "alt": "A hydraulic press forming areca leaf plates",
+    "srcW": 2560,
+    "srcH": 1536,
+    "outW": 2000,
+    "outH": 1200,
+    "bytes": 154068
+  },
+  {
+    "research": "areca/plates-02.jpg",
+    "file": "areca-plates.webp",
+    "alt": "Finished pressed areca leaf plates",
+    "srcW": 2000,
+    "srcH": 1359,
+    "outW": 2000,
+    "outH": 1359,
+    "bytes": 127034
+  },
+  {
+    "research": "areca/bowls-01.jpg",
+    "file": "areca-bowls.webp",
+    "alt": "A pressed areca leaf bowl",
+    "srcW": 1600,
+    "srcH": 1282,
+    "outW": 1600,
+    "outH": 1282,
+    "bytes": 140358
+  },
+  {
+    "research": "areca/stack-01.webp",
+    "file": "areca-stack.webp",
+    "alt": "Finished areca tableware stacked for packing",
+    "srcW": 3840,
+    "srcH": 1920,
+    "outW": 2000,
+    "outH": 1000,
+    "bytes": 315758
+  },
+  {
+    "research": "spices/cinnamon-04.jpg",
+    "file": "spice-cinnamon.webp",
+    "alt": "Cinnamon quills",
+    "srcW": 2048,
+    "srcH": 2048,
+    "outW": 2048,
+    "outH": 2048,
+    "bytes": 465092
+  },
+  {
+    "research": "spices/cardamom-03.jpg",
+    "file": "spice-cardamom.webp",
+    "alt": "Green cardamom pods",
+    "srcW": 2119,
+    "srcH": 1605,
+    "outW": 2119,
+    "outH": 1605,
+    "bytes": 195150
+  },
+  {
+    "research": "spices/clove-02.jpg",
+    "file": "spice-clove.webp",
+    "alt": "Whole dried cloves",
+    "srcW": 2560,
+    "srcH": 2560,
+    "outW": 2400,
+    "outH": 2400,
+    "bytes": 1439900
+  },
+  {
+    "research": "spices/chilli-01.jpg",
+    "file": "spice-chilli.webp",
+    "alt": "Whole dried red chillies",
+    "srcW": 1920,
+    "srcH": 2560,
+    "outW": 1920,
+    "outH": 2560,
+    "bytes": 655382
+  },
+  {
+    "research": "spices/pepper-03.jpg",
+    "file": "spice-pepper.webp",
+    "alt": "Black peppercorns",
+    "srcW": 1204,
+    "srcH": 1800,
+    "outW": 1204,
+    "outH": 1800,
+    "bytes": 225452
+  },
+  {
+    "research": "spices/star-anise-02.jpg",
+    "file": "spice-star-anise.webp",
+    "alt": "Whole star anise",
+    "srcW": 4685,
+    "srcH": 3068,
+    "outW": 2400,
+    "outH": 1572,
+    "bytes": 484958
+  },
+  {
+    "research": "spices/nutmeg-mace-01.webp",
+    "file": "spice-mace.webp",
+    "alt": "Mace, the red aril surrounding the nutmeg seed",
+    "srcW": 1600,
+    "srcH": 1068,
+    "outW": 1600,
+    "outH": 1068,
+    "bytes": 132430
+  },
+  {
+    "research": "coconut/dehusked-01.jpg",
+    "file": "coconut-dehusked.webp",
+    "alt": "Dehusked mature coconuts",
+    "srcW": 1920,
+    "srcH": 1920,
+    "outW": 1920,
+    "outH": 1920,
+    "bytes": 367526
+  },
+  {
+    "research": "coconut/whole-02.jpg",
+    "file": "coconut-whole.webp",
+    "alt": "Mature coconuts after harvest",
+    "srcW": 1698,
+    "srcH": 1131,
+    "outW": 1698,
+    "outH": 1131,
+    "bytes": 186516
+  },
+  {
+    "research": "coconut/plantation-01.jpg",
+    "file": "coconut-palm.webp",
+    "alt": "A coconut palm plantation",
+    "srcW": 2048,
+    "srcH": 1360,
+    "outW": 2048,
+    "outH": 1360,
+    "bytes": 821180
+  },
+  {
+    "research": "coconut/copra-04.jpg",
+    "file": "coconut-copra.webp",
+    "alt": "Copra — dried coconut kernel",
+    "srcW": 1872,
+    "srcH": 3328,
+    "outW": 1872,
+    "outH": 3328,
+    "bytes": 853668
+  },
+  {
+    "research": "oils/groundnut-01.webp",
+    "file": "oil-groundnut.webp",
+    "alt": "Raw groundnuts in the shell",
+    "srcW": 3024,
+    "srcH": 4032,
+    "outW": 2400,
+    "outH": 3200,
+    "bytes": 660578
+  },
+  {
+    "research": "oils/sunflower-seeds-01.png",
+    "file": "oil-sunflower.webp",
+    "alt": "Hulled sunflower seeds",
+    "srcW": 1200,
+    "srcH": 785,
+    "outW": 1200,
+    "outH": 785,
+    "bytes": 55890
+  },
+  {
+    "research": "oils/sesame-02.jpg",
+    "file": "oil-sesame.webp",
+    "alt": "White sesame seeds",
+    "srcW": 3500,
+    "srcH": 2329,
+    "outW": 2400,
+    "outH": 1597,
+    "bytes": 212632
+  },
+  {
+    "research": "oils/castor-seeds-02.webp",
+    "file": "oil-castor.webp",
+    "alt": "Castor seeds — supplied for industrial use only",
+    "srcW": 1600,
+    "srcH": 1047,
+    "outW": 1600,
+    "outH": 1047,
+    "bytes": 397568
+  },
+  {
+    "research": "oils/mustard-seeds-01.png",
+    "file": "oil-mustard.webp",
+    "alt": "Mustard seeds",
+    "srcW": 2500,
+    "srcH": 2500,
+    "outW": 2400,
+    "outH": 2400,
+    "bytes": 607860
+  },
+  {
+    "research": "oils/marachekku-02.jpg",
+    "file": "oil-ghani.webp",
+    "alt": "A traditional wooden ghani, or marachekku, oil press",
+    "srcW": 4147,
+    "srcH": 3079,
+    "outW": 2400,
+    "outH": 1782,
+    "bytes": 179846
+  },
+  {
+    "research": "oils/oil-pouring-03.jpg",
+    "file": "oil-bottle.webp",
+    "alt": "Unrefined cold-pressed oil",
+    "srcW": 2048,
+    "srcH": 2030,
+    "outW": 2048,
+    "outH": 2030,
+    "bytes": 301458
+  },
+  {
+    "research": "fcv/field-01.webp",
+    "file": "tobacco-field.webp",
+    "alt": "A flue-cured Virginia tobacco crop in the field",
+    "srcW": 1600,
+    "srcH": 900,
+    "outW": 1600,
+    "outH": 900,
+    "bytes": 152012
+  },
+  {
+    "research": "fcv/stacking-02.jpg",
+    "file": "tobacco-stack.webp",
+    "alt": "Tobacco leaf tied and racked for curing",
+    "srcW": 1892,
+    "srcH": 1530,
+    "outW": 1892,
+    "outH": 1530,
+    "bytes": 374776
+  },
+  {
+    "research": "fcv/barn-02.jpg",
+    "file": "tobacco-barn.webp",
+    "alt": "Leaf hanging to cure inside a barn",
+    "srcW": 1600,
+    "srcH": 900,
+    "outW": 1600,
+    "outH": 900,
+    "bytes": 163350
+  },
+  {
+    "research": "fcv/leaf-04.jpg",
+    "file": "tobacco-leaf.webp",
+    "alt": "A cured tobacco leaf, showing colour and texture",
+    "srcW": 1440,
+    "srcH": 1800,
+    "outW": 1440,
+    "outH": 1800,
+    "bytes": 241156
+  },
+  {
+    "research": "source/inspect-02.jpg",
+    "file": "source-farmer.webp",
+    "alt": "A grower working the crop in the field",
+    "srcW": 4928,
+    "srcH": 3280,
+    "outW": 2400,
+    "outH": 1597,
+    "bytes": 809470
+  },
+  {
+    "research": "source/weighing-03.jpg",
+    "file": "source-weighing.webp",
+    "alt": "Produce being weighed before dispatch",
+    "srcW": 1600,
+    "srcH": 1600,
+    "outW": 1600,
+    "outH": 1600,
+    "bytes": 128312
+  },
+  {
+    "research": "packaging/cartons-01.jpg",
+    "file": "pack-cartons.webp",
+    "alt": "Export cartons palletised for dispatch",
+    "srcW": 1600,
+    "srcH": 845,
+    "outW": 1600,
+    "outH": 845,
+    "bytes": 132920
+  },
+  {
+    "research": "packaging/sacks-01.webp",
+    "file": "pack-sacks.webp",
+    "alt": "Food-grade sacks stacked in a warehouse",
+    "srcW": 1920,
+    "srcH": 1280,
+    "outW": 1920,
+    "outH": 1280,
+    "bytes": 329512
+  },
+  {
+    "research": "packaging/loading-01.jpg",
+    "file": "pack-loading.webp",
+    "alt": "Goods being loaded into an export container",
+    "srcW": 1600,
+    "srcH": 1021,
+    "outW": 1600,
+    "outH": 1021,
+    "bytes": 134300
+  },
+  {
+    "research": "trade/ship-02.jpg",
+    "file": "trade-ship.webp",
+    "alt": "A container ship under way on open water",
+    "srcW": 1920,
+    "srcH": 1280,
+    "outW": 1920,
+    "outH": 1280,
+    "bytes": 543048
+  },
+  {
+    "research": "mysuru/farmland-01.jpg",
+    "file": "karnataka-land.webp",
+    "alt": "Farmland in the Karnataka countryside",
+    "srcW": 3264,
+    "srcH": 2448,
+    "outW": 2400,
+    "outH": 1800,
+    "bytes": 595162
+  },
+  {
+    "research": "mysuru/countryside-02.jpg",
+    "file": "mysuru-country.webp",
+    "alt": "Rural countryside near Mysuru",
+    "srcW": 3965,
+    "srcH": 2833,
+    "outW": 2400,
+    "outH": 1715,
+    "bytes": 530378
+  },
+  {
+    "research": "hero/hero-produce-01.png",
+    "file": "hero-produce.webp",
+    "alt": "Fresh produce arranged on a dark ground",
+    "srcW": 2500,
+    "srcH": 2500,
+    "outW": 2400,
+    "outH": 2400,
+    "bytes": 539038
+  },
+  {
+    "research": "hero/hero-landscape-03.jpg",
+    "file": "hero-landscape.webp",
+    "alt": "Agricultural land under an open sky",
+    "srcW": 1920,
+    "srcH": 1440,
+    "outW": 1920,
+    "outH": 1440,
+    "bytes": 427378
+  }
+]
