@@ -3,7 +3,7 @@
 import { useMemo, useRef, useState } from 'react';
 
 import { countries } from '@/lib/countries';
-import { materials, purposes, whatsappHref } from '@/lib/content';
+import { contact, materials, purposes, whatsappHref } from '@/lib/content';
 import { enquirySchema, unitsForProduct } from '@/lib/enquiry-schema';
 
 type Errors = Record<string, string>;
@@ -44,7 +44,7 @@ const INITIAL = {
  * Validation runs against the same zod schema the API uses, and on blur rather
  * than on keystroke — correcting someone mid-word is hostile.
  */
-export function EnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormProps) {
+function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormProps) {
   const [values, setValues] = useState({ ...INITIAL, product: defaultProduct });
   const [errors, setErrors] = useState<Errors>({});
   const [state, setState] = useState<'idle' | 'sending' | 'done' | 'error'>('idle');
@@ -479,4 +479,90 @@ function FieldError({ id, message }: { id: string; message?: string }) {
       {message}
     </p>
   );
+}
+
+/**
+ * Is this build a static export with no server behind it?
+ *
+ * Read once at module scope, not per render: it is inlined at build time and
+ * cannot change while the page is open.
+ */
+const STATIC_PREVIEW = process.env.NEXT_PUBLIC_STATIC_EXPORT === '1';
+
+/**
+ * What the enquiry panel becomes on a static host.
+ *
+ * GitHub Pages serves files and nothing else, so `/api/enquiry` does not exist
+ * there. The one unacceptable option was to keep rendering the form: it would
+ * collect a buyer's full requirement, fail on submit, and lose the enquiry —
+ * and a trade buyer who fills in quantity, destination and lead time and hears
+ * nothing back does not fill it in twice.
+ *
+ * So on that build the form is replaced by the ways of reaching Captain Exim
+ * that genuinely work from a static page, using the real contact details this
+ * site already carries. It says plainly that this is a preview, because the
+ * alternative is a buyer wondering why nobody replied.
+ */
+function DirectContactPanel({ className = '' }: { className?: string }) {
+  return (
+    <div className={`border border-rule bg-paper p-8 md:p-12 ${className}`}>
+      <p className="label text-accent">Preview build</p>
+
+      <h3 className="mt-5 font-display text-[clamp(1.75rem,3vw,2.5rem)] font-light text-ink">
+        Talk to us directly.
+      </h3>
+
+      <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-on-light-muted">
+        This is a static preview of the Captain Exim site, so the enquiry form is not connected
+        here. Every route below reaches us as normally — please include your product, quantity,
+        destination port and required lead time, and you will get a quotation back.
+      </p>
+
+      <dl className="mt-8 grid gap-5 sm:grid-cols-2">
+        <div>
+          <dt className="label text-on-light-faint">Email</dt>
+          <dd className="mt-2">
+            <a href={`mailto:${contact.email}`} className="link text-[0.9375rem] text-ink">
+              {contact.email}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="label text-on-light-faint">Telephone</dt>
+          <dd className="mt-2">
+            <a href={contact.phoneHref} className="link text-[0.9375rem] text-ink">
+              {contact.phone}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="label text-on-light-faint">WhatsApp</dt>
+          <dd className="mt-2">
+            <a
+              href={whatsappHref('Hello Captain Exim, I would like to enquire about a product.')}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link text-[0.9375rem] text-ink"
+            >
+              Message us
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="label text-on-light-faint">Hours</dt>
+          <dd className="mt-2 text-[0.9375rem] text-on-light-muted">{contact.hours}</dd>
+        </div>
+      </dl>
+
+      <p className="mt-8 max-w-[52ch] text-[0.875rem] leading-relaxed text-on-light-faint">
+        The working form — with validation, a reference number and an emailed acknowledgement —
+        is part of the full build and runs wherever the site is hosted on a server.
+      </p>
+    </div>
+  );
+}
+
+export function EnquiryForm(props: EnquiryFormProps) {
+  if (STATIC_PREVIEW) return <DirectContactPanel className={props.className} />;
+  return <LiveEnquiryForm {...props} />;
 }
