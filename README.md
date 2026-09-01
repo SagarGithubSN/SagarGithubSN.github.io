@@ -4,6 +4,13 @@ International sourcing of agricultural and natural products from Mysuru,
 Karnataka. Marketing site plus a working enquiry pipeline and a small internal
 admin.
 
+**Live preview:** <https://sagargithubsn.github.io/>
+
+Published from `main` on every push. The preview is a static export, so the
+enquiry form there is replaced by direct contact routes and `/admin` is absent —
+both need a server. See [DEPLOYMENT.md](DEPLOYMENT.md) for what that means and
+how to put the working form online.
+
 ---
 
 ## 1. Running it locally

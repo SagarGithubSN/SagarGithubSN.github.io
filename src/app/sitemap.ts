@@ -3,6 +3,12 @@ import type { MetadataRoute } from 'next';
 import { materials } from '@/lib/content';
 import { SITE_URL } from '@/lib/seo';
 
+/* Both of these are derived entirely from build-time constants, so there is
+   nothing to recompute per request. Declaring that explicitly is what lets the
+   static export emit them as plain files. */
+export const dynamic = 'force-static';
+
+
 /**
  * Sitemap.
  *

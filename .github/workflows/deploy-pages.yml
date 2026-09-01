@@ -1,0 +1,87 @@
+name: Deploy to GitHub Pages
+
+# Every push to main republishes the site. `workflow_dispatch` lets you
+# redeploy by hand from the Actions tab without making a commit.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deployment at a time. `cancel-in-progress: false` so a queued deploy
+# waits its turn rather than being thrown away — the last push should win.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+
+      - run: npm ci
+
+      # GitHub Pages serves files and runs nothing. These three cannot exist on
+      # it, so they are removed from the CI checkout before the build rather
+      # than being contorted into a shape that "exports" but does not work:
+      #
+      #   src/app/api      the enquiry endpoint
+      #   src/app/admin    the enquiry list, and its server actions
+      #   src/middleware   the Basic auth that protects the admin route
+      #
+      # This deletes nothing in the repository — only in this throwaway
+      # checkout. The full application is what stays committed, so moving to a
+      # host that runs Node needs no code change. See DEPLOYMENT.md.
+      - name: Remove routes a static host cannot serve
+        run: rm -rf src/app/api src/app/admin src/middleware.ts
+
+      - name: Build static export
+        env:
+          STATIC_EXPORT: '1'
+          # Swaps the enquiry form for real contact routes, so the preview
+          # never collects an enquiry it has no way to deliver.
+          NEXT_PUBLIC_STATIC_EXPORT: '1'
+          NEXT_PUBLIC_SITE_URL: https://sagargithubsn.github.io
+        run: npm run build
+
+      # Without this, Pages runs the output through Jekyll, which strips every
+      # directory beginning with an underscore — including _next, i.e. all the
+      # CSS and JavaScript.
+      - name: Disable Jekyll processing
+        run: touch out/.nojekyll
+
+      # A build that silently shipped the admin route or the API stub would be
+      # a security problem, not a cosmetic one, so fail loudly instead.
+      - name: Verify no server-only route was exported
+        run: |
+          if [ -e out/admin ] || [ -e out/api ]; then
+            echo "::error::A server-only route reached the static output."
+            exit 1
+          fi
+          echo "Export size: $(du -sh out | cut -f1)"
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
