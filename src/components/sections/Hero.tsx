@@ -42,24 +42,51 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
  * the right and bottom, which is where the mark sits.
  */
 /**
- * Crops the generator's watermark out of the bottom-right corner.
+ * Crops the generator's watermark off the bottom of the frame.
  *
- * The mark sits about 180px in from the right edge and 80px up from the
- * bottom of the 1280x720 source — 14% and 11% of the frame. The previous
- * film's crop hid only 9%, which was enough for that one and is not enough
- * for this.
+ * The mark sits in the bottom-right corner, but measured properly its top edge
+ * is only 76px up from the bottom of the 1280x720 source — 10.6% of the
+ * height. So it can be removed by cropping the bottom alone, and the sides
+ * never need to be touched.
  *
- * The two numbers are tied together. `translate` alone cannot be raised past
- * `(k-1)/2k` without pulling the opposite edge inside the viewport and opening
- * a gap, so the scale has to carry the rest: at k=1.24 the maximum usable
- * shift is 9.7%, and 8.6% of it is used, hiding 18.3% off the right and bottom
- * with the remainder left as margin against rounding. That clears the mark by
- * roughly 50px on both axes at every viewport aspect, including 16:9 where
- * `object-cover` contributes no crop of its own.
+ * That matters, because the first attempt cropped both axes and pushed the
+ * frame to the top-left to do it. It cost 24% magnification on an
+ * already-modest source, threw the composition off centre, and clipped the
+ * hull of the ship in the middle of the film. Cropping one edge instead needs
+ * only 16% — the same magnification the previous film used, so no additional
+ * softness — and leaves the horizontal framing untouched, which is what keeps
+ * the ship centred and its cargo whole.
+ *
+ * The two numbers are coupled: `translate` cannot exceed `(k-1)/2k` or the
+ * opposite edge pulls inside the viewport and opens a gap. At k=1.16 that
+ * ceiling is 6.9%, and 6.2% is used — hiding 13.1% off the bottom, which
+ * clears the mark by about 18px, while leaving 5px of overlap at the top so
+ * rounding cannot expose an edge.
  *
  * It is a crop, not a cover-up: nothing is painted over anything.
  */
-const HERO_CROP = 'scale(1.24) translate(8.6%, 8.6%)';
+const HERO_CROP = 'scale(1.16) translate(0%, 6.2%)';
+
+/**
+ * Lifts the film out of its own shadows.
+ *
+ * The footage is dark: measured across three frames, 37% / 22% / 9% of pixels
+ * sit below a luminance of 60, and the foreground foliage reads as near-black
+ * on a bright screen.
+ *
+ * `brightness` alone is the obvious lever and the wrong one — it is a straight
+ * multiply, so at 1.10 the sky is already clipping across 3% of the frame and
+ * the highlights go flat white. Pairing it with a slight contrast reduction
+ * pulls the top end back down while the multiply lifts the bottom, which is
+ * where the picture actually needed help. At these values the dark fraction
+ * drops by about four points on every frame tested and *no* channel clips
+ * anywhere — it even recovers the small amount of clipping present in the
+ * source. Saturation compensates for the flattening that lower contrast costs.
+ *
+ * The poster carries the identical grade, or the still and the film would not
+ * match when the video fades in over it.
+ */
+const HERO_GRADE = 'brightness(1.18) contrast(0.92) saturate(1.1)';
 
 export function Hero() {
   const reduced = useReducedMotion();
@@ -130,13 +157,14 @@ export function Hero() {
           priority
           sizes="100vw"
           className="object-cover object-[50%_45%]"
+          style={{ filter: HERO_GRADE }}
         />
 
         {!reduced ? (
           <video
             ref={videoRef}
             className="absolute inset-0 h-full w-full object-cover object-[50%_45%] transition-opacity duration-1000"
-            style={{ transform: HERO_CROP, opacity: ready ? 1 : 0 }}
+            style={{ transform: HERO_CROP, filter: HERO_GRADE, opacity: ready ? 1 : 0 }}
             src={hero.video}
             poster={hero.poster}
             autoPlay

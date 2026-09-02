@@ -398,7 +398,7 @@ in use on the areca product index.
 | Local file | Source | Notes |
 |---|---|---|
 | `public/videos/captain-exim-hero-2.mp4` | Client-supplied (`herovideo2.mp4`), AI-generated | 1280×720, 15.04 s, 26 MB, H.264. Aerial over a coconut plantation → aircraft in flight |
-| `public/img/hero-poster-2.webp` | Frame at 1.2 s of the above, cropped to the CSS window | 1032×581, 200 KB. Poster, and the whole picture under `prefers-reduced-motion` |
+| `public/img/hero-poster-2.webp` | Frame at 1.2 s of the above, cropped to the CSS window and carrying the same grade | 1103×621, 231 KB. Poster, and the whole picture under `prefers-reduced-motion` |
 
 Replaces the previous film and its poster, both deleted. The originals remain
 outside the repository at `C:\Claude Workspace\herovideo.mp4`.
@@ -407,13 +407,30 @@ outside the repository at `C:\Claude Workspace\herovideo.mp4`.
 `Grok`, bottom-right, about 180px in from the right edge and 80px up from the
 bottom of the 1280×720 frame. That is 14% and 11% of the frame, against the
 9% the previous crop hid, so `HERO_CROP` was widened from
-`scale(1.16) translate(2.5%, 2.5%)` to `scale(1.24) translate(8.6%, 8.6%)`.
-The two values are coupled: `translate` cannot exceed `(k-1)/2k` without
-pulling the opposite edge inside the viewport and opening a gap, so the scale
-has to carry the remainder. Verified with the mark's position projected into
-page coordinates at three aspect ratios — 16:9 (clear by 106px / 96px),
-2.36:1 ultrawide (133px / 266px) and 375×812 portrait (far outside) — with no
-edge gap in any of them. Nothing is painted over; it is a crop.
+`scale(1.16) translate(2.5%, 2.5%)` to `scale(1.16) translate(0%, 6.2%)` —
+the **bottom edge only**.
+
+A first attempt cropped both axes (`scale(1.24) translate(8.6%, 8.6%)`) and was
+wrong: measured properly the mark's top edge is only 76px up from the bottom,
+so the sides never needed touching. Cropping both cost 24% magnification on an
+already-modest source, pushed the frame off centre, and clipped the hull of the
+ship in the middle of the film. One edge needs only 16% — the same
+magnification the previous film used — and leaves the horizontal framing alone.
+
+The values are coupled: `translate` cannot exceed `(k-1)/2k` or the opposite
+edge pulls inside the viewport and opens a gap. At k=1.16 the ceiling is 6.9%
+and 6.2% is used, hiding 13.1% off the bottom. Verified by projecting the mark
+into page coordinates at 16:9 (clears by 32px), 2.36:1 ultrawide (193px) and
+375×812 portrait (far outside), with no edge gap in any, and with the ship
+fully in frame and centred to within 17px. Nothing is painted over; it is a
+crop.
+
+**Grade.** The film is dark — 37% / 22% / 9% of pixels below luminance 60
+across three sampled frames. `filter: brightness(1.18) contrast(0.92)
+saturate(1.1)` is applied to the video and the poster alike. `brightness`
+alone was rejected: it is a straight multiply and clipped 3% of the frame at
+only 1.10. The pair lifts the dark fraction by about four points on every
+frame tested with no channel clipping anywhere.
 
 **Weight.** 26 MB for 15 seconds of 720p is roughly 14 Mbit/s, which is a very
 high bitrate for the resolution — the file is several times larger than it
