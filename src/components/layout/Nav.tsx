@@ -31,11 +31,30 @@ import { brand, materials, nav } from '@/lib/content';
 type NavState = 'film' | 'veil' | 'solid';
 
 export function Nav() {
-  const [state, setState] = useState<NavState>('solid');
+  const pathname = usePathname();
+
+  /**
+   * The starting state has to be the one the page will actually be in.
+   *
+   * This used to start at 'solid' everywhere and correct itself in an effect,
+   * which meant the homepage painted a full ivory bar over the film and then
+   * faded it out — a visible flash on every load, made worse by the 500ms
+   * transition animating the correction. Deriving it from the route at the
+   * first render means there is nothing to correct.
+   */
+  const [state, setState] = useState<NavState>(() => (pathname === '/' ? 'film' : 'solid'));
   const [open, setOpen] = useState(false); // products dropdown (desktop)
   const [menu, setMenu] = useState(false); // full menu (mobile)
-  const pathname = usePathname();
   const closeTimer = useRef<number | undefined>(undefined);
+
+  /**
+   * Suppresses the crossfade until after the first measurement.
+   *
+   * A page restored mid-scroll still starts at 'film' and is corrected a frame
+   * later. That correction should be instant — animating it is the same flash
+   * in a different place.
+   */
+  const [ready, setReady] = useState(false);
 
   /**
    * Which state the bar is in.
@@ -75,11 +94,29 @@ export function Nav() {
         setState('solid');
         return;
       }
-      if (hero.getBoundingClientRect().bottom <= NAV_H) setState('solid');
-      else if (window.scrollY > VEIL_AT) setState('veil');
-      else setState('film');
+
+      /* The top of the page is always the bare treatment, whatever the
+         viewport. On a short screen the headline can already sit above the bar
+         at rest, and without this it would load solid and lose the film. */
+      if (window.scrollY <= VEIL_AT) {
+        setState('film');
+        return;
+      }
+
+      /* Solid at the moment the headline reaches the bar. The veil is enough
+         while the two are still apart, but nothing thin enough to be called a
+         veil will hold ivory display type off ivory links once they actually
+         meet, so the bar takes a ground of its own before they touch. */
+      const headline = document.getElementById('hero-headline');
+      const headlineReached = headline
+        ? headline.getBoundingClientRect().top <= NAV_H
+        : false;
+      const heroPassed = hero.getBoundingClientRect().bottom <= NAV_H;
+
+      setState(headlineReached || heroPassed ? 'solid' : 'veil');
     };
     sync();
+    setReady(true);
     window.addEventListener('scroll', sync, { passive: true });
     window.addEventListener('resize', sync);
     const backstop = window.setInterval(sync, 250);
@@ -152,7 +189,11 @@ export function Nav() {
 
   return (
     <header
-      className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+      className={`fixed inset-x-0 top-0 z-50 border-b ${
+        ready
+          ? 'transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]'
+          : ''
+      }`}
       style={{
         /* At rest: nothing at all, so the links read as part of the film.
            Past the hero: the normal ivory bar.

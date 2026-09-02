@@ -149,17 +149,22 @@ export function Hero() {
             </p>
           </Reveal>
 
-          <RevealLines
-            level={1}
-            stagger={130}
-            lines={[
-              hero.headline[0],
-              <span key="world" className="italic">
-                {hero.headline[1]}
-              </span>,
-            ]}
-            className="font-display text-[length:var(--text-hero)] font-light text-[color:var(--color-warm-white)] [text-shadow:0_1px_4px_rgba(0,0,0,0.35),0_3px_26px_rgba(0,0,0,0.4)]"
-          />
+          {/* The navigation watches this element: the bar goes solid at the
+              moment this headline reaches it, so the two never overlap. The id
+              is the contract between the two components — see Nav.tsx. */}
+          <div id="hero-headline">
+            <RevealLines
+              level={1}
+              stagger={130}
+              lines={[
+                hero.headline[0],
+                <span key="world" className="italic">
+                  {hero.headline[1]}
+                </span>,
+              ]}
+              className="font-display text-[length:var(--text-hero)] font-light text-[color:var(--color-warm-white)] [text-shadow:0_1px_4px_rgba(0,0,0,0.35),0_3px_26px_rgba(0,0,0,0.4)]"
+            />
+          </div>
 
           <Reveal delay={400}>
             <p
