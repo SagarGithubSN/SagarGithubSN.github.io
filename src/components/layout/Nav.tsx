@@ -153,21 +153,27 @@ export function Nav() {
       className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
         /* At rest: nothing at all, so the links read as part of the film.
-           Scrolling: the thinnest possible veil — 8% white and a blur. Enough
-           to stop the hero's own type showing through the navigation, far too
-           little to read as a panel laid over the footage.
-           Past the hero: the normal ivory bar. */
+           Past the hero: the normal ivory bar.
+
+           Scrolling, in between: as close to nothing as still works. The
+           separation here is done almost entirely by the blur, not by the
+           tint — blur has no colour and no surface, so it reads as the footage
+           going soft behind the type rather than as a panel laid over it. The
+           white is down to 3%, which is below the threshold where it registers
+           as a material at all; it is there only to keep the ivory links off
+           an equally bright frame. Taking the tint to zero is possible if this
+           is still too present. */
         background:
           mode === 'film'
             ? 'transparent'
             : mode === 'veil'
-              ? 'rgba(255,255,255,0.08)'
+              ? 'rgba(255,255,255,0.03)'
               : 'rgba(248,245,238,0.95)',
         borderColor:
           mode === 'film'
             ? 'transparent'
             : mode === 'veil'
-              ? 'rgba(255,255,255,0.16)'
+              ? 'rgba(255,255,255,0.08)'
               : 'var(--color-rule)',
         backdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
         WebkitBackdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
