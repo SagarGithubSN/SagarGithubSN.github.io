@@ -133,6 +133,8 @@ export function Nav() {
   /* Both hero states put ivory type on the footage; only the ground differs. */
   const onFilm = mode !== 'solid';
 
+  const blur = mode === 'film' ? 'none' : mode === 'veil' ? 'blur(4px)' : 'blur(10px)';
+
   // A whisper of shadow — enough to hold an edge against a bright sky frame,
   // not enough to read as a drop shadow.
   const heroTextShadow = onFilm ? '0 1px 10px rgba(0,0,0,0.18)' : undefined;
@@ -175,8 +177,14 @@ export function Nav() {
             : mode === 'veil'
               ? 'rgba(255,255,255,0.08)'
               : 'var(--color-rule)',
-        backdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
-        WebkitBackdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
+        /* The veil's blur is deliberately weaker than the solid bar's. Behind
+           the solid bar sits 95% opaque ivory, where the blur is barely doing
+           anything anyway; behind the veil it is the only thing separating two
+           layers of type, but at 10px it was soft enough to read as a material.
+           4px still breaks up the hero's letterforms without looking like
+           frosted glass. */
+        backdropFilter: blur,
+        WebkitBackdropFilter: blur,
       }}
     >
       <div className="shell flex h-[4.5rem] items-center justify-between gap-6">
@@ -212,7 +220,7 @@ export function Nav() {
               aria-expanded={open}
               aria-haspopup="true"
               onFocus={openDropdown}
-              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap py-2 font-mono text-[0.6875rem] uppercase tracking-[0.2em] transition-colors duration-500 ${linkColour} ${linkHover}`}
+              className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap py-2 font-mono text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-500 ${linkColour} ${linkHover}`}
               style={{ textShadow: heroTextShadow }}
             >
               Products
@@ -262,7 +270,7 @@ export function Nav() {
                 key={n.href}
                 href={n.href}
                 aria-current={pathname === n.href ? 'page' : undefined}
-                className={`shrink-0 whitespace-nowrap py-2 font-mono text-[0.6875rem] uppercase tracking-[0.2em] transition-colors duration-500 ${
+                className={`shrink-0 whitespace-nowrap py-2 font-mono text-[0.75rem] uppercase tracking-[0.2em] transition-colors duration-500 ${
                   pathname === n.href ? linkActive : linkColour
                 } ${linkHover}`}
                 style={{ textShadow: heroTextShadow }}
@@ -279,7 +287,7 @@ export function Nav() {
             href="/request-a-quote"
             aria-hidden={onFilm}
             tabIndex={onFilm ? -1 : 0}
-            className="btn btn-solid !px-6 !py-3 !text-[0.625rem] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="btn btn-solid !px-6 !py-3 !text-[0.6875rem] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
               opacity: onFilm ? 0 : 1,
               transform: onFilm ? 'translateY(-0.4rem)' : 'none',
