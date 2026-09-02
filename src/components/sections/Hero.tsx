@@ -41,7 +41,25 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
  * scale(1.16) alone hides ~6.9% on every side; +2.5% biases that to ~9.4% on
  * the right and bottom, which is where the mark sits.
  */
-const HERO_CROP = 'scale(1.16) translate(2.5%, 2.5%)';
+/**
+ * Crops the generator's watermark out of the bottom-right corner.
+ *
+ * The mark sits about 180px in from the right edge and 80px up from the
+ * bottom of the 1280x720 source — 14% and 11% of the frame. The previous
+ * film's crop hid only 9%, which was enough for that one and is not enough
+ * for this.
+ *
+ * The two numbers are tied together. `translate` alone cannot be raised past
+ * `(k-1)/2k` without pulling the opposite edge inside the viewport and opening
+ * a gap, so the scale has to carry the rest: at k=1.24 the maximum usable
+ * shift is 9.7%, and 8.6% of it is used, hiding 18.3% off the right and bottom
+ * with the remainder left as margin against rounding. That clears the mark by
+ * roughly 50px on both axes at every viewport aspect, including 16:9 where
+ * `object-cover` contributes no crop of its own.
+ *
+ * It is a crop, not a cover-up: nothing is painted over anything.
+ */
+const HERO_CROP = 'scale(1.24) translate(8.6%, 8.6%)';
 
 export function Hero() {
   const reduced = useReducedMotion();

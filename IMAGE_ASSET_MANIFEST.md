@@ -271,8 +271,8 @@ scroll-scrubbed photography using `agro-grading`, `pack-sacks`, `pack-cartons`,
 
 | Asset | Source | Notes |
 |---|---|---|
-| `public/videos/captain-exim-hero.mp4` | Client-supplied (`herovideo.mp4`), AI-generated | 1280×720, 10.04 s, 19 MB. Plantation → container ship → cargo aircraft |
-| `public/img/hero-poster.webp` | Frame at 1.2 s of the above | 1126×634. Poster, and the whole picture under `prefers-reduced-motion` |
+| ~~`public/videos/captain-exim-hero.mp4`~~ | Client-supplied (`herovideo.mp4`), AI-generated | Superseded 2 September 2026 — see the revision at the end of this file |
+| ~~`public/img/hero-poster.webp`~~ | Frame at 1.2 s of the above | Superseded with the film above |
 
 **Watermark.** The supplied film carries a "Grok" mark in the bottom-right
 corner. It is cropped out at render time — `HERO_CROP` in `Hero.tsx` scales the
@@ -390,3 +390,41 @@ branding before use, and all four are clean after the beat-02 crop.
 **Now unused.** `areca-grading.webp` and `areca-packing.webp` are no longer
 referenced by any component and have been deleted. `areca-range.webp` remains
 in use on the areca product index.
+
+---
+
+## Revision — hero film replaced, 2 September 2026
+
+| Local file | Source | Notes |
+|---|---|---|
+| `public/videos/captain-exim-hero-2.mp4` | Client-supplied (`herovideo2.mp4`), AI-generated | 1280×720, 15.04 s, 26 MB, H.264. Aerial over a coconut plantation → aircraft in flight |
+| `public/img/hero-poster-2.webp` | Frame at 1.2 s of the above, cropped to the CSS window | 1032×581, 200 KB. Poster, and the whole picture under `prefers-reduced-motion` |
+
+Replaces the previous film and its poster, both deleted. The originals remain
+outside the repository at `C:\Claude Workspace\herovideo.mp4`.
+
+**Watermark.** The film carries the same generator mark as its predecessor —
+`Grok`, bottom-right, about 180px in from the right edge and 80px up from the
+bottom of the 1280×720 frame. That is 14% and 11% of the frame, against the
+9% the previous crop hid, so `HERO_CROP` was widened from
+`scale(1.16) translate(2.5%, 2.5%)` to `scale(1.24) translate(8.6%, 8.6%)`.
+The two values are coupled: `translate` cannot exceed `(k-1)/2k` without
+pulling the opposite edge inside the viewport and opening a gap, so the scale
+has to carry the remainder. Verified with the mark's position projected into
+page coordinates at three aspect ratios — 16:9 (clear by 106px / 96px),
+2.36:1 ultrawide (133px / 266px) and 375×812 portrait (far outside) — with no
+edge gap in any of them. Nothing is painted over; it is a crop.
+
+**Weight.** 26 MB for 15 seconds of 720p is roughly 14 Mbit/s, which is a very
+high bitrate for the resolution — the file is several times larger than it
+needs to be. There is no ffmpeg on this machine, so it could not be
+re-encoded. It should be compressed before launch; at a sane bitrate this
+would be 3–5 MB with no visible difference, and it is currently the largest
+single download on the site by an order of magnitude.
+
+**Resolution.** 1280×720 is modest for a full-bleed hero, and the 1.24 crop
+magnifies it further — the effective source is about 1030×580 stretched across
+the viewport. It will look soft on a large or high-density display. A
+higher-resolution master would fix both this and the weight.
+
+**Licence: UNKNOWN — prototype only, replace or verify before production.**
