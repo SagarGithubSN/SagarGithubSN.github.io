@@ -139,7 +139,13 @@ export function Hero() {
 
       {/* ---------- Type ---------- */}
       <div className="shell relative z-10 pb-[clamp(3rem,9vh,6rem)] pt-40">
-        <div className="max-w-[46rem]">
+        {/* The navigation goes solid when the top of this block reaches the
+            bar, so no hero type ever passes behind a transparent nav. It is
+            the block rather than the headline because the eyebrow sits above
+            the headline and therefore arrives first — only ~20px earlier, but
+            on a phone that 20px is the difference between a clean handover and
+            two sets of type overlapping. See Nav.tsx. */}
+        <div id="hero-copy" className="max-w-[46rem]">
           <Reveal>
             <p
               className="label mb-7 text-[color:rgba(255,253,248,0.9)]"
@@ -149,10 +155,7 @@ export function Hero() {
             </p>
           </Reveal>
 
-          {/* The navigation watches this element: the bar goes solid at the
-              moment this headline reaches it, so the two never overlap. The id
-              is the contract between the two components — see Nav.tsx. */}
-          <div id="hero-headline">
+          <div>
             <RevealLines
               level={1}
               stagger={130}

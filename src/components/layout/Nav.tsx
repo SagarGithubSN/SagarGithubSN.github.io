@@ -119,17 +119,20 @@ export function Nav() {
         return;
       }
 
-      /* Solid at the moment the headline reaches the bar. The veil is enough
-         while the two are still apart, but nothing thin enough to be called a
-         veil will hold ivory display type off ivory links once they actually
-         meet, so the bar takes a ground of its own before they touch. */
-      const headline = document.getElementById('hero-headline');
-      const headlineReached = headline
-        ? headline.getBoundingClientRect().top <= NAV_H
-        : false;
+      /* Solid at the moment the hero's type reaches the bar. The veil is
+         enough while the two are still apart, but nothing thin enough to be
+         called a veil will hold hero type off the navigation once they
+         actually meet, so the bar takes a ground of its own before they touch.
+
+         This measures the whole copy block, not the headline. The headline is
+         what the eye notices, but the eyebrow above it arrives first, and on a
+         narrow screen it was crossing into the bar while the veil was still
+         the active state. */
+      const copy = document.getElementById('hero-copy');
+      const copyReached = copy ? copy.getBoundingClientRect().top <= NAV_H : false;
       const heroPassed = hero.getBoundingClientRect().bottom <= NAV_H;
 
-      setState(headlineReached || heroPassed ? 'solid' : 'veil');
+      setState(copyReached || heroPassed ? 'solid' : 'veil');
     };
     sync();
     setReady(true);
@@ -389,8 +392,16 @@ export function Nav() {
       {/* ---------- Mobile sheet ---------- */}
       <div
         id="mobile-menu"
-        className="overflow-hidden border-t border-rule bg-ivory transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden"
-        style={{ maxHeight: menu ? 'calc(100svh - 4.5rem)' : '0' }}
+        className="overflow-hidden border-t bg-ivory transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden"
+        style={{
+          maxHeight: menu ? 'calc(100svh - 4.5rem)' : '0',
+          /* Collapsing this panel sets its height to zero, but a border on a
+             zero-height box is still painted — which drew a hairline the full
+             width of the screen, directly under a navigation that is supposed
+             to have no bar at all over the film. The rule belongs to the open
+             sheet, so it only exists when the sheet does. */
+          borderTopColor: menu ? 'var(--color-rule)' : 'transparent',
+        }}
       >
         <nav aria-label="Mobile" className="shell max-h-[calc(100svh-4.5rem)] overflow-y-auto py-6">
           <p className="label mb-4 text-on-light-faint">Products</p>
