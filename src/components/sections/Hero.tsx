@@ -175,8 +175,11 @@ export function Hero() {
             </p>
           </Reveal>
 
+          {/* The navigation watches this row too: its own quote button stays
+              hidden while these are on screen, and takes over the moment they
+              leave. One call to action at a time. See Nav.tsx. */}
           <Reveal delay={520}>
-            <div className="mt-9 flex flex-wrap gap-3">
+            <div id="hero-cta" className="mt-9 flex flex-wrap gap-3">
               <Button href={hero.primary.href} variant="ivory">
                 {hero.primary.label}
               </Button>

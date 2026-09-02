@@ -43,6 +43,17 @@ export function Nav() {
    * first render means there is nothing to correct.
    */
   const [state, setState] = useState<NavState>(() => (pathname === '/' ? 'film' : 'solid'));
+  /**
+   * Whether the bar shows its own quote button.
+   *
+   * This is a separate question from what the bar looks like, and tying the
+   * two together was wrong: the bar now goes solid as the headline reaches it,
+   * which is well before the hero's own quote button has left the screen — so
+   * both appeared at once, which is the duplication this was meant to avoid.
+   * It is now driven by the hero's button row directly. One call to action on
+   * screen at a time.
+   */
+  const [showCta, setShowCta] = useState(() => pathname !== '/');
   const [open, setOpen] = useState(false); // products dropdown (desktop)
   const [menu, setMenu] = useState(false); // full menu (mobile)
   const closeTimer = useRef<number | undefined>(undefined);
@@ -88,6 +99,11 @@ export function Nav() {
     const VEIL_AT = 200;
 
     const sync = () => {
+      /* Hidden until the hero's own button row has gone behind the bar. On a
+         route with no hero row there is nothing to defer to, so it shows. */
+      const heroCta = document.getElementById('hero-cta');
+      setShowCta(!heroCta || heroCta.getBoundingClientRect().bottom <= NAV_H);
+
       const hero = document.getElementById('top');
       // Routes without a film hero are solid from the first paint.
       if (!hero) {
@@ -320,19 +336,18 @@ export function Nav() {
               </Link>
             ))}
 
-          {/* Over the hero this is suppressed: the hero already carries a
-              REQUEST A QUOTE button a few hundred pixels below, and two of them
-              on one screen is just repetition. It fades in as soon as the hero
-              is behind you, in the same position. */}
+          {/* Suppressed while the hero's own REQUEST A QUOTE is on screen —
+              two of them at once is just repetition. It fades in at the
+              moment that one goes behind the bar, in the same position. */}
           <Link
             href="/request-a-quote"
-            aria-hidden={onFilm}
-            tabIndex={onFilm ? -1 : 0}
+            aria-hidden={!showCta}
+            tabIndex={showCta ? 0 : -1}
             className="btn btn-solid !px-6 !py-3 !text-[0.6875rem] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
-              opacity: onFilm ? 0 : 1,
-              transform: onFilm ? 'translateY(-0.4rem)' : 'none',
-              pointerEvents: onFilm ? 'none' : 'auto',
+              opacity: showCta ? 1 : 0,
+              transform: showCta ? 'none' : 'translateY(-0.4rem)',
+              pointerEvents: showCta ? 'auto' : 'none',
             }}
           >
             Request a quote
