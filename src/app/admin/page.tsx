@@ -118,7 +118,7 @@ export default async function AdminPage({
         {rows.length === 0 ? (
           <p className="mt-12 border border-dashed border-rule-strong bg-paper p-8 text-[0.9375rem] text-on-light-muted">
             No enquiries match. If this is unexpected, check that the server can write to the data
-            directory — enquiries are also appended to <code>data/enquiries.jsonl</code> as a
+            directory - enquiries are also appended to <code>data/enquiries.jsonl</code> as a
             fallback.
           </p>
         ) : (
@@ -148,11 +148,11 @@ export default async function AdminPage({
                     ['Product', materialById(r.product)?.name ?? 'General enquiry'],
                     ['Quantity', `${r.quantity} ${r.unit}`],
                     ['Destination', r.destination],
-                    ['Purpose', r.purpose ?? '—'],
+                    ['Purpose', r.purpose ?? '-'],
                     ['Contact', r.contactPerson],
                     ['Email', r.email],
                     ['Phone', r.phone],
-                    ['From page', r.sourcePage ?? '—'],
+                    ['From page', r.sourcePage ?? '-'],
                   ].map(([k, v]) => (
                     <div key={k}>
                       <dt className="font-mono text-[0.5625rem] uppercase tracking-[0.18em] text-on-light-faint">
@@ -208,7 +208,7 @@ export default async function AdminPage({
                   </button>
 
                   <a
-                    href={`mailto:${r.email}?subject=${encodeURIComponent(`Captain Exim — your enquiry ${r.reference}`)}`}
+                    href={`mailto:${r.email}?subject=${encodeURIComponent(`Captain Exim - your enquiry ${r.reference}`)}`}
                     className="btn btn-light !py-3"
                   >
                     Reply

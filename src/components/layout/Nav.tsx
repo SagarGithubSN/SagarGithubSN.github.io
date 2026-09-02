@@ -258,7 +258,7 @@ export function Nav() {
             onFilm ? 'text-[color:var(--color-ivory)]' : 'text-ink'
           }`}
           style={{ textShadow: heroTextShadow }}
-          aria-label={`${brand.name} — home`}
+          aria-label={`${brand.name} - home`}
         >
           <span className="font-display text-[clamp(1.25rem,1.7vw,1.6rem)] font-light leading-none tracking-[0.06em]">
             {brand.wordmark}

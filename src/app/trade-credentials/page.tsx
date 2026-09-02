@@ -52,7 +52,7 @@ export default function TradeCredentialsPage() {
                 <p className="max-w-[44ch] text-[0.875rem] leading-relaxed text-on-light-muted">
                   If you are evaluating Captain Exim as a supplier, ask for the registrations
                   relevant to your product and market in your first message. They will be sent as
-                  documents with numbers you can verify with the issuing body — not as images.
+                  documents with numbers you can verify with the issuing body - not as images.
                 </p>
               </div>
             </Reveal>
@@ -98,7 +98,7 @@ export default function TradeCredentialsPage() {
                     ))}
                   </ul>
                   <p className="mt-7 border-t border-rule pt-5 text-[0.8125rem] leading-relaxed text-on-light-faint">
-                    Applicability varies by product and destination — not every registration is
+                    Applicability varies by product and destination - not every registration is
                     relevant to every consignment, and we will tell you which ones are.
                   </p>
                 </div>

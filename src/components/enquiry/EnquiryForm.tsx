@@ -163,7 +163,7 @@ function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormPro
         </svg>
 
         <h3 className="mt-6 font-display text-[clamp(1.75rem,3vw,2.5rem)] font-light text-ink">
-          Thank you — we have it.
+          Thank you - we have it.
         </h3>
 
         <p className="mt-4 max-w-[46ch] text-[0.9375rem] leading-relaxed text-on-light-muted">
@@ -175,7 +175,7 @@ function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormPro
 
         <p className="mt-5 text-[0.875rem] text-on-light-muted">
           Have a specification sheet? Reply to that acknowledgement with it attached, quoting your
-          reference — or{' '}
+          reference - or{' '}
           <a
             href={whatsappHref(`Hello Captain Exim, this is about enquiry ${reference}.`)}
             target="_blank"
@@ -232,7 +232,7 @@ function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormPro
             <option value="">Select a category…</option>
             {materials.map((m) => (
               <option key={m.id} value={m.id}>
-                {m.number} — {m.name}
+                {m.number} - {m.name}
               </option>
             ))}
             <option value="general">Something else / general enquiry</option>
@@ -419,7 +419,7 @@ function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormPro
             id="requirement"
             rows={5}
             className="field resize-y"
-            placeholder="Specification, grade, packing, target price, delivery window — whatever you already know."
+            placeholder="Specification, grade, packing, target price, delivery window - whatever you already know."
             value={values.requirement}
             aria-invalid={invalid('requirement')}
             aria-describedby={errors.requirement ? 'requirement-err' : 'requirement-hint'}
@@ -428,7 +428,7 @@ function LiveEnquiryForm({ defaultProduct = '', className = '' }: EnquiryFormPro
           />
           {!errors.requirement ? (
             <p id="requirement-hint" className="mt-1.5 text-[0.75rem] text-on-light-faint">
-              Have a specification document? Send the enquiry first — you can reply to the
+              Have a specification document? Send the enquiry first - you can reply to the
               acknowledgement email with it attached.
             </p>
           ) : null}
@@ -514,7 +514,7 @@ function DirectContactPanel({ className = '' }: { className?: string }) {
 
       <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-on-light-muted">
         This is a static preview of the Captain Exim site, so the enquiry form is not connected
-        here. Every route below reaches us as normally — please include your product, quantity,
+        here. Every route below reaches us as normally - please include your product, quantity,
         destination port and required lead time, and you will get a quotation back.
       </p>
 
@@ -555,7 +555,7 @@ function DirectContactPanel({ className = '' }: { className?: string }) {
       </dl>
 
       <p className="mt-8 max-w-[52ch] text-[0.875rem] leading-relaxed text-on-light-faint">
-        The working form — with validation, a reference number and an emailed acknowledgement —
+        The working form - with validation, a reference number and an emailed acknowledgement -
         is part of the full build and runs wherever the site is hosted on a server.
       </p>
     </div>

@@ -445,3 +445,27 @@ the viewport. It will look soft on a large or high-density display. A
 higher-resolution master would fix both this and the weight.
 
 **Licence: UNKNOWN — prototype only, replace or verify before production.**
+
+---
+
+## Revision — footer mark, 2 September 2026
+
+| Local file | Source | Notes |
+|---|---|---|
+| `public/img/captain-exim-mark.webp` | Emblem cropped from `captain-exim-logo.webp` | 670x634, 76 KB. Footer, on an ivory plate |
+
+The supplied lockup is navy-and-gold artwork on a cream ground with **no alpha
+channel**, and the footer is dark green. Keying the cream out was rejected: the
+illustration's soft shadows, cloud and compass rose all dissolve into it, and a
+knocked-out mark would be navy on forest, which is unreadable. It therefore
+keeps its own ground, and the ground is made deliberate — the plate is ivory
+(`#f8f5ee`) and the artwork's own background samples at `rgb(250,242,233)` to
+`rgb(251,241,235)` on all four corners, a difference of at most five points, so
+no seam is visible and the whole thing reads as one cream square.
+
+The crop takes the emblem only, stopping at y=752 of the original so that the
+artwork's own cream band forms the bottom margin rather than the ship's water
+running to a cut edge. The lockup's internal "CAPTAIN EXIM" and tagline are
+excluded: at 88px they would be illegible, and the name is already set in type
+directly beneath. The image is marked presentational (`alt=""`) for the same
+reason — a screen reader would otherwise announce the name twice.

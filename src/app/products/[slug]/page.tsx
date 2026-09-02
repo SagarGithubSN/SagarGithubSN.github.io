@@ -62,7 +62,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <>
       <PageHeader
-        eyebrow={`${m.number} — Product`}
+        eyebrow={`${m.number} - Product`}
         headline={page.headline}
         lede={m.lede}
         crumbs={[

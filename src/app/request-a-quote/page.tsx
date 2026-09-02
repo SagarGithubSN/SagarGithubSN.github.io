@@ -10,7 +10,7 @@ import { HowWeWork } from '@/components/sections/HowWeWork';
 export const metadata: Metadata = {
   title: 'Request a quote',
   description:
-    'Tell Captain Exim what you are sourcing — product, volume, unit and destination — and receive a quotation and a realistic lead time from a named person.',
+    'Tell Captain Exim what you are sourcing - product, volume, unit and destination - and receive a quotation and a realistic lead time from a named person.',
   alternates: { canonical: '/request-a-quote' },
 };
 
@@ -27,7 +27,7 @@ export default function RequestAQuotePage() {
       <PageHeader
         eyebrow="Request a quote"
         headline={['Tell us what', 'you’re sourcing.']}
-        lede="Product, volume, unit and destination is enough to start. You will get a quotation and a realistic lead time from a named person — not a ticket number."
+        lede="Product, volume, unit and destination is enough to start. You will get a quotation and a realistic lead time from a named person - not a ticket number."
         crumbs={[{ name: 'Request a quote', path: '/request-a-quote' }]}
       />
 
@@ -88,7 +88,7 @@ export default function RequestAQuotePage() {
             <Reveal delay={160}>
               <p className="mt-8 max-w-[38ch] text-[0.875rem] leading-relaxed text-on-light-faint">
                 Every enquiry gets a reference number and an acknowledgement by email. If you do not
-                receive one, something has gone wrong — please call or message us.
+                receive one, something has gone wrong - please call or message us.
               </p>
             </Reveal>
           </div>

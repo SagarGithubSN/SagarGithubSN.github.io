@@ -9,7 +9,7 @@ import { EnquiryForm } from '@/components/enquiry/EnquiryForm';
 
 export const metadata: Metadata = {
   title: 'Contact',
-  description: `Contact Captain Exim in ${brand.city}, ${brand.region}, India — by phone, WhatsApp or email. Business hours, registered address and location.`,
+  description: `Contact Captain Exim in ${brand.city}, ${brand.region}, India - by phone, WhatsApp or email. Business hours, registered address and location.`,
   alternates: { canonical: '/contact' },
 };
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         headline={['Let’s talk trade.']}
-        lede="Tell us the product, the volume and the destination. If it is easier to talk first, call or message — someone here will answer."
+        lede="Tell us the product, the volume and the destination. If it is easier to talk first, call or message - someone here will answer."
         crumbs={[{ name: 'Contact', path: '/contact' }]}
       >
         <div className="flex flex-wrap gap-3">

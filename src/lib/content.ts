@@ -72,7 +72,7 @@ export const nav = [
    ------------------------------------------------------------------------- */
 
 export const hero = {
-  eyebrow: 'Mysuru, Karnataka — India',
+  eyebrow: 'Mysuru, Karnataka - India',
   headline: ['From India.', 'To the world.'],
   lede: 'Captain Exim connects international buyers with carefully sourced agricultural and natural products from Mysuru, Karnataka.',
   primary: { label: 'Request a quote', href: '/request-a-quote' },
@@ -92,7 +92,7 @@ export const intro = {
   eyebrow: 'Captain Exim',
   headline: ['Good trade starts', 'at the source.'],
   body: [
-    'Captain Exim is a sourcing and export house based in Mysuru, Karnataka. We work directly with growers and sourcing networks across the region, so that what a product is — its grade, its origin, its process — is understood here, before it is offered to anyone abroad.',
+    'Captain Exim is a sourcing and export house based in Mysuru, Karnataka. We work directly with growers and sourcing networks across the region, so that what a product is - its grade, its origin, its process - is understood here, before it is offered to anyone abroad.',
     'That is a deliberately small way to operate. It is also the only way we know to answer a buyer’s question with a fact rather than an assurance.',
   ],
   marquee: [
@@ -179,7 +179,7 @@ export const materials: readonly Material[] = [
     page: {
       headline: ['Designed', 'by nature.'],
       overview: [
-        'Nothing is grown for this. The areca palm sheds its leaf sheath on its own schedule, and what has already fallen becomes tableware — with water, heat and pressure, and nothing else.',
+        'Nothing is grown for this. The areca palm sheds its leaf sheath on its own schedule, and what has already fallen becomes tableware - with water, heat and pressure, and nothing else.',
         'The result is a direct alternative to plastic, polymer and coated-paper disposables: rigid, leak-resistant, microwave safe and fully biodegradable, with the grain of the original leaf still visible in the finished piece.',
       ],
       items: ['Plates', 'Bowls', 'Trays', 'Cutlery'],
@@ -223,7 +223,7 @@ export const materials: readonly Material[] = [
         'Packed to buyer specification. Carton counts and pallet configuration are agreed per order.',
       specs: [
         { k: 'Material', v: 'Naturally fallen areca palm leaf sheath' },
-        { k: 'Additives', v: 'None — no bleach, resin, binder or coating' },
+        { k: 'Additives', v: 'None - no bleach, resin, binder or coating' },
         { k: 'Biodegradable', v: 'Yes' },
         { k: 'Microwave safe', v: 'Yes' },
         { k: 'Suitable for', v: 'Hot, cold, dry and liquid food' },
@@ -235,7 +235,7 @@ export const materials: readonly Material[] = [
     number: '02',
     name: 'Agricultural Products',
     short: 'Agro',
-    lede: 'Fresh produce sourced directly from farms we know by name — ginger, ladyfinger, beans, chillies and drumstick.',
+    lede: 'Fresh produce sourced directly from farms we know by name - ginger, ladyfinger, beans, chillies and drumstick.',
     image: '/img/agro-beans.webp',
     alt: 'Freshly picked green beans',
     gallery: [
@@ -252,7 +252,7 @@ export const materials: readonly Material[] = [
     page: {
       headline: ['Grown by people', 'we can telephone.'],
       overview: [
-        'Fresh vegetables sourced from farms around Mysuru and the surrounding districts of Karnataka. Rather than buy through an agent, we go to the farm — which means the person who grew a consignment is someone we can call when a buyer asks a question about it.',
+        'Fresh vegetables sourced from farms around Mysuru and the surrounding districts of Karnataka. Rather than buy through an agent, we go to the farm - which means the person who grew a consignment is someone we can call when a buyer asks a question about it.',
         'It also means we can encourage traditional fertiliser over chemical inputs, and see the crop before it is committed to anyone.',
       ],
       items: ['Ginger', 'Ladyfinger (okra)', 'Beans', 'Chillies', 'Drumstick'],
@@ -275,7 +275,7 @@ export const materials: readonly Material[] = [
     number: '03',
     name: 'Spices',
     short: 'Spices',
-    lede: 'Cinnamon, cardamom, clove, chilli, pepper, star anise and mace — whole spice sourced through the Mysuru trade and graded to buyer specification.',
+    lede: 'Cinnamon, cardamom, clove, chilli, pepper, star anise and mace - whole spice sourced through the Mysuru trade and graded to buyer specification.',
     /* One frame carrying four of the named spices — clove, cardamom, star
        anise and black pepper — so the homepage index shows the actual range
        rather than a single generic spice shot. */
@@ -283,7 +283,7 @@ export const materials: readonly Material[] = [
     alt: 'Cardamom pods, whole cloves, black peppercorns and star anise',
     gallery: [
       { src: '/img/spice-chilli.webp', alt: 'Whole dried red chillies' },
-      { src: '/img/spice-mace.webp', alt: 'Mace — the red aril surrounding the nutmeg seed' },
+      { src: '/img/spice-mace.webp', alt: 'Mace - the red aril surrounding the nutmeg seed' },
     ],
     units: ['Kg', 'Metric Tons', 'Bags', 'Cartons'],
     notes: ['Whole spice', 'Graded to buyer specification'],
@@ -318,7 +318,7 @@ export const materials: readonly Material[] = [
         {
           label: 'Mace (japatre)',
           src: '/img/spice-mace.webp',
-          alt: 'Mace — the red aril surrounding the nutmeg seed',
+          alt: 'Mace - the red aril surrounding the nutmeg seed',
           note: 'The aril around the nutmeg seed, not the nutmeg itself',
         },
       ],
@@ -336,7 +336,7 @@ export const materials: readonly Material[] = [
     alt: 'Split coconuts showing the white kernel inside the brown shell',
     gallery: [
       { src: '/img/coconut-whole.webp', alt: 'Whole mature coconuts ready for grading' },
-      { src: '/img/coconut-copra.webp', alt: 'Copra — dried coconut kernel' },
+      { src: '/img/coconut-copra.webp', alt: 'Copra - dried coconut kernel' },
       { src: '/img/coconut-palm.webp', alt: 'Coconut palms over green fields in southern Karnataka' },
     ],
     units: ['Pieces', 'Kg', 'Metric Tons', 'Bags', "20' Container", "40' Container"],
@@ -350,7 +350,7 @@ export const materials: readonly Material[] = [
       ],
       items: [],
       itemsNote:
-        'The confirmed coconut product list is being finalised. Send us the form you need — whole nut, copra, or a specific by-product — with volume and destination, and we will confirm what can be sourced.',
+        'The confirmed coconut product list is being finalised. Send us the form you need - whole nut, copra, or a specific by-product - with volume and destination, and we will confirm what can be sourced.',
       originNote: 'Coastal and southern Karnataka, India.',
       packagingNote: 'Bags, bulk or containerised to buyer specification.',
     },
@@ -360,9 +360,9 @@ export const materials: readonly Material[] = [
     number: '05',
     name: 'Cooking Oils & Oil Seeds',
     short: 'Oils',
-    lede: 'Groundnut, sunflower, sesame and mustard, drawn on a wooden gaana — the cold-press method used on this subcontinent for millennia. Castor is offered for industrial use.',
+    lede: 'Groundnut, sunflower, sesame and mustard, drawn on a wooden gaana - the cold-press method used on this subcontinent for millennia. Castor is offered for industrial use.',
     image: '/img/oil-ghani.webp',
-    alt: 'A traditional wooden ghani — the cold-press mill used for sesame, mustard and copra',
+    alt: 'A traditional wooden ghani - the cold-press mill used for sesame, mustard and copra',
     gallery: [
       { src: '/img/oil-bottle.webp', alt: 'A bottle of unrefined cold-pressed oil' },
       { src: '/img/oil-mustard.webp', alt: 'A poured heap of mustard seed beside a spoon' },
@@ -374,7 +374,7 @@ export const materials: readonly Material[] = [
     page: {
       headline: ['Tradition has', 'a reason.'],
       overview: [
-        'Oils have been drawn from groundnut, sesame, mustard and coconut on this subcontinent since long before refining existed. The wooden gaana — also called ghani, or marachekku — turns slowly and cold, and that is the entire point: nothing is heated, and nothing is stripped out and added back.',
+        'Oils have been drawn from groundnut, sesame, mustard and coconut on this subcontinent since long before refining existed. The wooden gaana - also called ghani, or marachekku - turns slowly and cold, and that is the entire point: nothing is heated, and nothing is stripped out and added back.',
         'The commercial position here is purity rather than nutrition. We are not making health claims; we are telling you exactly how the oil was extracted and what is and is not in it.',
       ],
       /* Range supplied by the client, 1 September 2026. Castor is listed
@@ -386,11 +386,11 @@ export const materials: readonly Material[] = [
         'Sesame oil',
         'Mustard oil',
         'Coconut oil',
-        'Castor oil — industrial use',
+        'Castor oil - industrial use',
         'Oil seeds (groundnut, sunflower, sesame, mustard, castor)',
       ],
       itemsNote:
-        'Pack sizes and presentation are agreed per order; bulk and retail-pack requirements are both quotable. Castor oil and castor seed are supplied for industrial and technical applications only — they are not food products.',
+        'Pack sizes and presentation are agreed per order; bulk and retail-pack requirements are both quotable. Castor oil and castor seed are supplied for industrial and technical applications only - they are not food products.',
       processing: [
         {
           n: '01',
@@ -400,7 +400,7 @@ export const materials: readonly Material[] = [
         {
           n: '02',
           title: 'Gaana',
-          body: 'A wooden mortar and pestle turned slowly — the method known as gaana, ghani or marachekku.',
+          body: 'A wooden mortar and pestle turned slowly - the method known as gaana, ghani or marachekku.',
         },
         {
           n: '03',
@@ -410,7 +410,7 @@ export const materials: readonly Material[] = [
         {
           n: '04',
           title: 'Filtering',
-          body: 'Settled and filtered, then packed to the buyer’s unit — unrefined.',
+          body: 'Settled and filtered, then packed to the buyer’s unit - unrefined.',
         },
       ],
       itemImages: [
@@ -418,12 +418,12 @@ export const materials: readonly Material[] = [
         { label: 'Sunflower', src: '/img/oil-sunflower.webp', alt: 'Hulled sunflower seeds' },
         { label: 'Sesame', src: '/img/oil-sesame.webp', alt: 'White sesame seeds' },
         { label: 'Mustard', src: '/img/oil-mustard.webp', alt: 'Mustard seeds' },
-        { label: 'Coconut (copra)', src: '/img/coconut-copra.webp', alt: 'Copra — dried coconut kernel' },
+        { label: 'Coconut (copra)', src: '/img/coconut-copra.webp', alt: 'Copra - dried coconut kernel' },
         {
           label: 'Castor',
           src: '/img/oil-castor.webp',
           alt: 'Castor seeds, supplied for industrial use only',
-          note: 'Industrial and technical use only — not a food product',
+          note: 'Industrial and technical use only - not a food product',
         },
       ],
       originNote: 'Pressed in and around Mysuru, Karnataka.',
@@ -434,7 +434,7 @@ export const materials: readonly Material[] = [
         { k: 'Solvent used', v: 'None' },
         { k: 'Refining', v: 'Unrefined' },
         { k: 'Edible seeds', v: 'Groundnut, sunflower, sesame, mustard, coconut (copra)' },
-        { k: 'Industrial', v: 'Castor — non-edible, technical applications only' },
+        { k: 'Industrial', v: 'Castor - non-edible, technical applications only' },
       ],
     },
   },
@@ -443,7 +443,7 @@ export const materials: readonly Material[] = [
     number: '06',
     name: 'FCV Tobacco',
     short: 'FCV Tobacco',
-    lede: 'Flue-cured Virginia leaf from the Mysuru belt — the low-nicotine, neutral filler the international trade knows by region.',
+    lede: 'Flue-cured Virginia leaf from the Mysuru belt - the low-nicotine, neutral filler the international trade knows by region.',
     image: '/img/tobacco-crop.webp',
     alt: 'Bullocks working a tobacco field in the Karnataka belt',
     gallery: [
@@ -505,7 +505,7 @@ export const arecaProcess = {
   eyebrow: 'Areca leaf products',
   headline: ['Fallen, not felled.'],
   intro:
-    'Nothing is grown for this. The palm sheds its leaf sheath on its own schedule, and what has already fallen becomes tableware — with water, heat and pressure, and nothing else.',
+    'Nothing is grown for this. The palm sheds its leaf sheath on its own schedule, and what has already fallen becomes tableware - with water, heat and pressure, and nothing else.',
   beats: [
     {
       n: '01',
@@ -527,7 +527,7 @@ export const arecaProcess = {
       n: '03',
       label: 'Washed',
       heading: 'Water, until the fibre gives.',
-      body: 'Each sheath is washed free of soil and grit and soaked until it is pliable enough to take a form without cracking. That is the whole preparation — there is no chemical stage.',
+      body: 'Each sheath is washed free of soil and grit and soaked until it is pliable enough to take a form without cracking. That is the whole preparation - there is no chemical stage.',
       image: '/img/areca-washing.webp',
       alt: 'Areca sheaths being washed by hand under running water',
     },
@@ -535,7 +535,7 @@ export const arecaProcess = {
       n: '04',
       label: 'Pressed',
       heading: 'Heat and pressure. No binder.',
-      body: 'The softened sheath is pressed between shaped heated dies. No bleach, no resin and no coating at any stage — the grain in a finished plate is the grain the leaf already had.',
+      body: 'The softened sheath is pressed between shaped heated dies. No bleach, no resin and no coating at any stage - the grain in a finished plate is the grain the leaf already had.',
       image: '/img/areca-press.webp',
       alt: 'A line of heated presses forming washed areca sheaths into plates',
     },
@@ -609,7 +609,7 @@ export const oils = {
     {
       n: '02',
       title: 'Gaana',
-      body: 'A wooden mortar and pestle turned slowly — also called ghani, or marachekku.',
+      body: 'A wooden mortar and pestle turned slowly - also called ghani, or marachekku.',
     },
     { n: '03', title: 'Extraction', body: 'Cold pressure only. No heat is applied and no solvent is used.' },
     { n: '04', title: 'Oil', body: 'Unrefined, filtered, and packed to the buyer’s unit.' },
@@ -745,7 +745,7 @@ export const tobacco = {
   ],
   /** Regional context — explicitly not Captain Exim's own figures. */
   regional: {
-    caption: 'Regional context — Karnataka tobacco belt, not Captain Exim figures',
+    caption: 'Regional context - Karnataka tobacco belt, not Captain Exim figures',
     stats: [
       { v: '70,000+', k: 'Hectares under Virginia tobacco across Mysuru and Hassan' },
       { v: '56,000', k: 'Registered growers in the belt' },
@@ -770,7 +770,7 @@ export const values = {
     },
     {
       k: 'Humility',
-      v: 'Good sourcing begins by listening — to what a buyer actually needs, and to the people who grow and make the product.',
+      v: 'Good sourcing begins by listening - to what a buyer actually needs, and to the people who grow and make the product.',
     },
     {
       k: 'Integrity',
@@ -812,7 +812,7 @@ export const sustainability = {
      CONTENT_GAPS.md, which is where that belongs. */
   tree: {
     headline: 'One export, one tree.',
-    body: 'A tree goes into the ground for every export that leaves — planted in the districts we buy from, not somewhere convenient. It does not offset a shipment and we will not claim it does. It is simply the part we can do every time, and it compounds.',
+    body: 'A tree goes into the ground for every export that leaves - planted in the districts we buy from, not somewhere convenient. It does not offset a shipment and we will not claim it does. It is simply the part we can do every time, and it compounds.',
     image: '/img/tree-sapling.webp',
     imageAlt: 'A young sapling being planted by hand in open soil',
   },
@@ -826,7 +826,7 @@ export const howWeWork = {
   eyebrow: 'How we work',
   headline: ['Six steps,', 'no surprises.'],
   intro:
-    'The commercial process from first enquiry to dispatch. Steps we do not control — freight booking, destination clearance — are named as such rather than claimed.',
+    'The commercial process from first enquiry to dispatch. Steps we do not control - freight booking, destination clearance - are named as such rather than claimed.',
   steps: [
     {
       n: '01',
@@ -915,7 +915,7 @@ export const purposes = ['Reselling', 'End use', 'Raw material'] as const;
 export const enquiry = {
   eyebrow: 'Request a quote',
   headline: ['Tell us what', 'you’re sourcing.'],
-  body: 'Give us the product, the volume and the destination. You will get a quotation and a realistic lead time from a named person — not a ticket number.',
+  body: 'Give us the product, the volume and the destination. You will get a quotation and a realistic lead time from a named person - not a ticket number.',
   privacyNote:
     'We use these details only to answer your enquiry. They are not sold or shared with third parties.',
 } as const;

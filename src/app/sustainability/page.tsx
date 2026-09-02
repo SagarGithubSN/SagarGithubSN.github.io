@@ -71,7 +71,7 @@ export default function SustainabilityPage() {
         <div className="shell">
           <Reveal>
             <p className="max-w-[62ch] text-[length:var(--text-lede)] leading-relaxed text-on-light-muted">
-              The clearest example is areca. Nothing is grown or cut for it — the palm drops its
+              The clearest example is areca. Nothing is grown or cut for it - the palm drops its
               leaf sheath on its own, and the whole process from there is water, heat and pressure.{' '}
               <Link href="/products/areca" className="link text-accent">
                 See the areca process

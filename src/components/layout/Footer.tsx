@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 import { brand, contact, footer, materials, nav, whatsappHref } from '@/lib/content';
@@ -18,6 +19,34 @@ export function Footer() {
         <div className="grid gap-12 border-b border-rule-dark pb-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr] md:gap-10">
           {/* Positioning */}
           <div>
+            {/* The client's mark, on the one dark ground on the site.
+                
+                It was supplied as navy and gold artwork on cream with no alpha
+                channel, and keying that cream out is not an option: the soft
+                shadows, the cloud and the compass rose all dissolve into it,
+                and a knocked-out mark would be navy on forest, which is
+                unreadable. So it keeps its own ground, and the ground is made
+                deliberate rather than accidental — this plate is ivory, within
+                two or three points of the artwork's own background, so no seam
+                shows between the two and the whole thing reads as a single
+                cream square rather than a picture pasted onto the footer.
+
+                Only the emblem is used. The supplied lockup sets CAPTAIN EXIM
+                and the tagline inside the artwork, which at this size would be
+                unreadable, and the name is already set in type immediately
+                below it. The image is marked presentational for the same
+                reason: a screen reader would otherwise hear the name twice. */}
+            <div className="mb-7 inline-block bg-ivory p-3">
+              <Image
+                src="/img/captain-exim-mark.webp"
+                alt=""
+                width={670}
+                height={617}
+                sizes="7rem"
+                className="h-[5.5rem] w-auto"
+              />
+            </div>
+
             <p className="font-mono text-[0.8125rem] font-medium tracking-[0.22em] text-ivory">
               {brand.wordmark}
             </p>

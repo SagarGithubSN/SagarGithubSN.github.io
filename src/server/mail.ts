@@ -64,12 +64,12 @@ function rows(enquiry: EnquiryInput, reference: string): [string, string][] {
     ['Product', productLabel(enquiry.product)],
     ['Quantity', `${enquiry.quantity} ${enquiry.unit}`],
     ['Destination', enquiry.destination],
-    ['Purpose', enquiry.purpose ?? '—'],
+    ['Purpose', enquiry.purpose ?? '-'],
     ['Company', enquiry.company],
     ['Contact', enquiry.contactPerson],
     ['Email', enquiry.email],
     ['Phone / WhatsApp', enquiry.phone],
-    ['From page', enquiry.sourcePage ?? '—'],
+    ['From page', enquiry.sourcePage ?? '-'],
   ];
 }
 
@@ -100,7 +100,7 @@ function ackHtml(enquiry: EnquiryInput, reference: string): string {
   return `<div style="background:#f8f5ee;padding:28px">
     <div style="max-width:600px;margin:auto;background:#fff;border:1px solid #e6dfd3;padding:30px">
       <p style="margin:0 0 20px;font:11px/1.4 ui-monospace,monospace;letter-spacing:.22em;color:#292824;text-transform:uppercase">${esc(brand.wordmark)}</p>
-      <h1 style="margin:0 0 16px;font:300 26px/1.25 Georgia,serif;color:#292824">Thank you — we have your enquiry.</h1>
+      <h1 style="margin:0 0 16px;font:300 26px/1.25 Georgia,serif;color:#292824">Thank you - we have your enquiry.</h1>
       <p style="margin:0 0 16px;font:15px/1.65 -apple-system,sans-serif;color:#605d54">
         Dear ${esc(enquiry.contactPerson)}, we have received your enquiry for
         <strong style="color:#292824">${esc(productLabel(enquiry.product))}</strong>
@@ -138,7 +138,7 @@ export async function sendEnquiryMail(
     // Development, or SMTP not yet provisioned. The enquiry is already stored,
     // so this is a degraded path, not a lost lead.
     console.warn(
-      `[enquiry] SMTP not configured — ${reference} stored but not emailed. ` +
+      `[enquiry] SMTP not configured - ${reference} stored but not emailed. ` +
         'Set SMTP_HOST, SMTP_USER and SMTP_PASS to enable delivery.',
     );
     return { notified: false, acknowledged: false };
@@ -156,7 +156,7 @@ export async function sendEnquiryMail(
       from,
       to: recipient,
       replyTo: `${enquiry.contactPerson} <${enquiry.email}>`,
-      subject: `[${reference}] ${productLabel(enquiry.product)} — ${enquiry.company} (${enquiry.destination})`,
+      subject: `[${reference}] ${productLabel(enquiry.product)} - ${enquiry.company} (${enquiry.destination})`,
       text: `${plain}\n\nRequirement:\n${enquiry.requirement}\n`,
       html: internalHtml(enquiry, reference),
     });
@@ -169,7 +169,7 @@ export async function sendEnquiryMail(
     await transport.sendMail({
       from,
       to: enquiry.email,
-      subject: `${brand.name} — enquiry received (${reference})`,
+      subject: `${brand.name} - enquiry received (${reference})`,
       text:
         `Dear ${enquiry.contactPerson},\n\n` +
         `We have received your enquiry for ${productLabel(enquiry.product)} ` +

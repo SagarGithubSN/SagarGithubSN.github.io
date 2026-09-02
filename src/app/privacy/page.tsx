@@ -49,7 +49,7 @@ export default function PrivacyPage() {
       h: 'Who can see it',
       p: [
         'Enquiries are stored on our server and emailed to Captain Exim staff handling the enquiry. Email is delivered through our mail provider, and the contact page embeds a map served by Google, which may set its own cookies if you interact with it.',
-        'Where a shipment requires it, relevant commercial details may be shared with the parties needed to complete it — for example a freight forwarder or a customs agent.',
+        'Where a shipment requires it, relevant commercial details may be shared with the parties needed to complete it - for example a freight forwarder or a customs agent.',
       ],
     },
     {

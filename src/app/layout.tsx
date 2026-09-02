@@ -41,11 +41,11 @@ const mono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Captain Exim — Agricultural & natural product sourcing from Mysuru, India',
+    default: 'Captain Exim - Agricultural & natural product sourcing from Mysuru, India',
     template: '%s · Captain Exim',
   },
   description:
-    'Captain Exim connects international buyers with carefully sourced agricultural and natural products from Mysuru, Karnataka — areca leaf tableware, fresh produce, spices, coconut, cold-pressed oils and FCV tobacco.',
+    'Captain Exim connects international buyers with carefully sourced agricultural and natural products from Mysuru, Karnataka - areca leaf tableware, fresh produce, spices, coconut, cold-pressed oils and FCV tobacco.',
   keywords: [
     'areca leaf products exporter India',
     'areca plate exporter India',
@@ -61,14 +61,14 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'Captain Exim',
     locale: 'en_IN',
-    title: 'Captain Exim — Sourcing from Mysuru, India',
+    title: 'Captain Exim - Sourcing from Mysuru, India',
     description:
       'International sourcing of agricultural and natural products from Mysuru, Karnataka.',
     images: [{ url: '/img/areca-plates.webp', width: 1200, height: 630, alt: 'Captain Exim' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Captain Exim — Sourcing from Mysuru, India',
+    title: 'Captain Exim - Sourcing from Mysuru, India',
     description:
       'International sourcing of agricultural and natural products from Mysuru, Karnataka.',
     images: ['/img/areca-plates.webp'],

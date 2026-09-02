@@ -179,7 +179,7 @@ export function Materials() {
             </div>
 
             <p className="absolute bottom-6 right-0 font-mono text-[0.625rem] uppercase tracking-[0.18em] text-on-light-faint">
-              {current.number} — {current.short}
+              {current.number} - {current.short}
             </p>
           </div>
         </div>

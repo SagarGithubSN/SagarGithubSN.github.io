@@ -108,7 +108,7 @@ export function ProcessSequence({
                   }}
                 >
                   <p className="font-mono text-[0.6875rem] tracking-[0.22em] text-accent">
-                    {b.n} — {b.label.toUpperCase()}
+                    {b.n} - {b.label.toUpperCase()}
                   </p>
                   <h3 className="mt-5 font-display text-[clamp(1.9rem,2.9vw,2.9rem)] font-light leading-[1.08]">
                     {b.heading}
@@ -194,7 +194,7 @@ export function ProcessSequence({
             {beats.map((b, i) => (
               <li key={b.n} className="border-t border-rule py-8 first:border-t-0 first:pt-0">
                 <p className="font-mono text-[0.6875rem] tracking-[0.22em] text-accent">
-                  {b.n} — {b.label.toUpperCase()}
+                  {b.n} - {b.label.toUpperCase()}
                 </p>
                 <h3 className="mt-3 font-display text-[1.65rem] font-light leading-[1.12]">
                   {b.heading}

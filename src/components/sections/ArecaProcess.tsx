@@ -102,7 +102,7 @@ export function ArecaProcess() {
             href="/products/areca"
             className="link font-mono text-[0.6875rem] uppercase tracking-[0.2em] text-accent"
           >
-            Areca leaf products — specifications and packing →
+            Areca leaf products - specifications and packing →
           </Link>
         </Reveal>
       </div>

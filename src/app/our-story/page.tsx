@@ -48,7 +48,7 @@ export default function OurStoryPage() {
               <div className="mb-9 max-w-[15rem]">
                 <Image
                   src="/img/captain-exim-logo.webp"
-                  alt="Captain Exim — together, we export excellence"
+                  alt="Captain Exim - together, we export excellence"
                   width={1000}
                   height={1000}
                   sizes="15rem"
@@ -63,7 +63,7 @@ export default function OurStoryPage() {
                 cooking oils, and flue-cured Virginia tobacco.
               </p>
               <p className="mt-5 max-w-[52ch] text-[0.9375rem] leading-relaxed text-on-light-muted">
-                The common thread is not a category — it is proximity. Everything here comes from a
+                The common thread is not a category - it is proximity. Everything here comes from a
                 region we can reach in a morning, from people we deal with directly.
               </p>
             </div>
