@@ -392,15 +392,21 @@ export function Nav() {
       {/* ---------- Mobile sheet ---------- */}
       <div
         id="mobile-menu"
-        className="overflow-hidden border-t bg-ivory transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden"
+        className="overflow-hidden border-t border-rule bg-ivory transition-[max-height] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] xl:hidden"
         style={{
           maxHeight: menu ? 'calc(100svh - 4.5rem)' : '0',
-          /* Collapsing this panel sets its height to zero, but a border on a
-             zero-height box is still painted — which drew a hairline the full
-             width of the screen, directly under a navigation that is supposed
-             to have no bar at all over the film. The rule belongs to the open
-             sheet, so it only exists when the sheet does. */
-          borderTopColor: menu ? 'var(--color-rule)' : 'transparent',
+          /* Collapsing this panel sets its content height to zero, but the
+             border is outside the content box and is still painted — a
+             hairline the full width of the screen, directly under a
+             navigation that is supposed to have no bar at all over the film.
+
+             Making it `transparent` does not remove it. Backgrounds paint
+             under the border box (`background-clip: border-box` is the
+             default), so this panel's own ivory showed straight through the
+             transparent border and the line simply changed colour. The width
+             has to go to zero, which is the only thing that stops a border
+             occupying space. */
+          borderTopWidth: menu ? '1px' : '0px',
         }}
       >
         <nav aria-label="Mobile" className="shell max-h-[calc(100svh-4.5rem)] overflow-y-auto py-6">
