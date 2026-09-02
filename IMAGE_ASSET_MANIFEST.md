@@ -445,3 +445,48 @@ the viewport. It will look soft on a large or high-density display. A
 higher-resolution master would fix both this and the weight.
 
 **Licence: UNKNOWN — prototype only, replace or verify before production.**
+
+---
+
+## Revision - hero film re-encoded, 2 September 2026
+
+| Local file | Notes |
+|---|---|
+| `public/videos/captain-exim-hero-3.mp4` | 1102x620, 15.04 s, **5.91 MB**, H.264 high, no audio, faststart |
+| `public/img/hero-poster-3.webp` | 1102x620, 199 KB, cut from the encoded film |
+
+Replaces `captain-exim-hero-2.mp4` (25.84 MB) and `hero-poster-2.webp`, both
+deleted. New filenames deliberately: GitHub Pages caps `Cache-Control` at 600s
+and does not allow overrides, so a changed name is the only way to guarantee no
+visitor is served the old file.
+
+**Why.** The source ran at 14,410 kb/s - roughly ten times what 720p needs -
+and carried a 128 kb/s stereo audio track that could never be heard, since the
+element is muted. On any connection that could not sustain that rate the film
+faded in and then stalled on a frozen frame.
+
+**Encode.** `crop=1102:620:88:6`, libx264 CRF 25, preset veryslow, high
+profile, yuv420p, `+faststart`, `-an`. 3,296 kb/s, a 77% reduction.
+
+CRF was chosen by measurement rather than by feel, against a lossless encode of
+the identically cropped source:
+
+| CRF | Size | SSIM |
+|---|---|---|
+| 22 | 10.16 MB | 0.978 |
+| **25** | **5.91 MB** | **0.964** |
+| 28 | 3.85 MB | 0.950 |
+
+25 holds the dense palm-frond detail, which is where low bitrates visibly turn
+to mush; 28 was measurably softer for 2 MB.
+
+**The crop is now in the file.** The watermark is cropped at encode time to
+exactly the window the old CSS transform was showing, so `HERO_CROP` is gone.
+That transform magnified an already-modest 720p source by 16% and made the
+browser decode 1280x720 to display 1102x620 of it. Same framing now, no
+upscaling, and the poster is cut from the encoded film so the still and the
+film are the same pixels.
+
+Encoded with `ffmpeg-static`, installed with `--no-save` and removed
+afterwards: it is a one-off tool, and leaving it in `package.json` would have
+made every CI deploy download an 80 MB binary it never uses.

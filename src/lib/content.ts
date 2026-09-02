@@ -80,8 +80,8 @@ export const hero = {
   /* The film runs plantation -> container ship -> cargo aircraft, which is the
      headline stated in pictures. The rotating six-frame product cluster it
      replaced is gone; the product range is introduced by the index below. */
-  video: '/videos/captain-exim-hero-2.mp4',
-  poster: '/img/hero-poster-2.webp',
+  video: '/videos/captain-exim-hero-3.mp4',
+  poster: '/img/hero-poster-3.webp',
 } as const;
 
 /* ---------------------------------------------------------------------------

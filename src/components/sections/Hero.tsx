@@ -20,52 +20,29 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
  * the type sits, and leaves the right side and the top of the frame alone. The
  * ocean, the sky and the canopy keep their colour.
  *
- * THE CROP. The source carries a generator watermark in the bottom-right
- * corner. The video is scaled slightly and biased up-left so that corner falls
- * outside the frame — see `HERO_CROP`. It is a crop, not a cover-up: nothing is
- * painted over. The poster frame was cut with the identical crop so the still
- * and the film match exactly.
+ * THE CROP. The source carried a generator watermark in the bottom-right
+ * corner. It is cropped out of the file itself at encode time rather than
+ * hidden by CSS, so nothing is painted over and nothing is magnified to push
+ * it out of view. The poster is cut from the encoded film, so the still and
+ * the film are the same pixels.
  *
  * REDUCED MOTION. `prefers-reduced-motion` gets the poster as a still image and
  * the <video> is never mounted, so no bytes are spent on a film that will not
  * play.
  */
 
-/**
- * Scale + offset that pushes the source's bottom-right corner out of frame.
+/*
+ * The watermark is gone from the file itself.
  *
- * The translate is POSITIVE: moving the content down-right carries the
- * bottom-right watermark past the container edge. A negative offset does the
- * opposite — it drags that corner back toward the middle of the frame.
+ * A transform used to sit here, magnifying the film 16% and sliding it up so
+ * the generator's mark fell outside the viewport. That was always a workaround
+ * for not having a transcoder: it cost real sharpness on an already-modest
+ * 720p source, and it made the browser decode 1280x720 in order to display
+ * about 1102x620 of it.
  *
- * scale(1.16) alone hides ~6.9% on every side; +2.5% biases that to ~9.4% on
- * the right and bottom, which is where the mark sits.
+ * The film is now cropped to exactly that window at encode time, so there is
+ * nothing to hide and nothing to magnify. Same framing, no upscaling.
  */
-/**
- * Crops the generator's watermark off the bottom of the frame.
- *
- * The mark sits in the bottom-right corner, but measured properly its top edge
- * is only 76px up from the bottom of the 1280x720 source — 10.6% of the
- * height. So it can be removed by cropping the bottom alone, and the sides
- * never need to be touched.
- *
- * That matters, because the first attempt cropped both axes and pushed the
- * frame to the top-left to do it. It cost 24% magnification on an
- * already-modest source, threw the composition off centre, and clipped the
- * hull of the ship in the middle of the film. Cropping one edge instead needs
- * only 16% — the same magnification the previous film used, so no additional
- * softness — and leaves the horizontal framing untouched, which is what keeps
- * the ship centred and its cargo whole.
- *
- * The two numbers are coupled: `translate` cannot exceed `(k-1)/2k` or the
- * opposite edge pulls inside the viewport and opens a gap. At k=1.16 that
- * ceiling is 6.9%, and 6.2% is used — hiding 13.1% off the bottom, which
- * clears the mark by about 18px, while leaving 5px of overlap at the top so
- * rounding cannot expose an edge.
- *
- * It is a crop, not a cover-up: nothing is painted over anything.
- */
-const HERO_CROP = 'scale(1.16) translate(0%, 6.2%)';
 
 /**
  * Lifts the film out of its own shadows.
@@ -97,24 +74,22 @@ export function Hero() {
   /**
    * Decides whether to fetch the film at all.
    *
-   * It is 26 MB for fifteen seconds — a very high bitrate for 720p — and
-   * pushing that at someone on a metered or slow connection is indefensible
-   * when there is a perfectly good still of the same frame already loaded.
-   * Data Saver, and anything the browser classes as 2G, get the poster and
-   * nothing else. Read in an effect rather than during render because it is
-   * client-only and would not match the server's HTML.
+   * Only Data Saver. That is a preference the visitor has actually expressed,
+   * so honouring it is unambiguous.
+   *
+   * `effectiveType` was tried as a second signal and dropped. It is a rolling
+   * estimate, and in testing the same browser on the same connection reported
+   * `4g` and `slow-2g` minutes apart — gating on that would have silently
+   * denied the film to people whose connection was fine, which is a worse
+   * failure than a slow load. The weight argument that justified it has also
+   * mostly gone: the film is 5.9 MB now, not 26 MB, and the readiness gate
+   * below already guarantees a half-buffered film is never shown.
    */
   useEffect(() => {
     if (reduced) return;
-    type Conn = { saveData?: boolean; effectiveType?: string };
+    type Conn = { saveData?: boolean };
     const conn = (navigator as Navigator & { connection?: Conn }).connection;
-    /* Only 4g and better. At 26 MB this file needs minutes on a 3g line, so
-       "not 2g" is the wrong bar — the browser's own estimate of 3g already
-       means the film would arrive long after the reader has gone. When the
-       API is unavailable we do not know, and load it. */
-    const slow = ['slow-2g', '2g', '3g'].includes(conn?.effectiveType ?? '');
-    const frugal = Boolean(conn?.saveData) || slow;
-    if (!frugal) setAllowVideo(true);
+    if (!conn?.saveData) setAllowVideo(true);
   }, [reduced]);
 
   /**
@@ -211,7 +186,7 @@ export function Hero() {
           <video
             ref={videoRef}
             className="absolute inset-0 h-full w-full object-cover object-[50%_45%] transition-opacity duration-1000"
-            style={{ transform: HERO_CROP, filter: HERO_GRADE, opacity: ready ? 1 : 0 }}
+            style={{ filter: HERO_GRADE, opacity: ready ? 1 : 0 }}
             src={hero.video}
             poster={hero.poster}
             autoPlay
