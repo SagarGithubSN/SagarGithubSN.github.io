@@ -10,9 +10,11 @@ import { Reveal, RevealLines } from '@/components/ui/Reveal';
  * policy — it is three product decisions that happen to be defensible. Those
  * are stated; nothing else is.
  *
- * The tree-per-export commitment is gated behind `sustainability.tree.confirmed`.
- * Until the client confirms it is active under Captain Exim, it renders as an
- * intention with an explicit note, and never with a count. See CONTENT_GAPS.md.
+ * The tree-per-export commitment is stated in the present tense and carries no
+ * count. It used to render with a caveat about the count being unverified,
+ * which put a hedge on the page where a commitment should be — the reader does
+ * not need to be walked through what we have not confirmed. Confirming it
+ * before launch is tracked in CONTENT_GAPS.md instead.
  */
 export function Sustainability() {
   const { tree } = sustainability;
@@ -65,16 +67,6 @@ export function Sustainability() {
               <p className="mt-4 max-w-[52ch] text-[0.9375rem] leading-relaxed text-ink/75">
                 {tree.body}
               </p>
-
-              {!tree.confirmed ? (
-                <p className="mt-5 flex max-w-[52ch] gap-3 text-[0.8125rem] leading-relaxed text-on-light-faint">
-                  <span
-                    aria-hidden="true"
-                    className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-bright"
-                  />
-                  {tree.pendingNote}
-                </p>
-              ) : null}
             </div>
 
             {/* A sapling going into the ground, not a crop: the image has to

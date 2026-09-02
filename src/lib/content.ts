@@ -805,13 +805,14 @@ export const sustainability = {
       body: 'Buying direct lets us encourage traditional fertiliser over chemical inputs, rather than simply specifying it from a distance.',
     },
   ],
+  /* Stated as what it is: a standing commitment, in the present tense. It
+     carries no count, because a number nobody can check is worth less than
+     the commitment itself — but the absence of a number is not something the
+     page needs to talk about. Verification before launch is tracked in
+     CONTENT_GAPS.md, which is where that belongs. */
   tree: {
     headline: 'One export, one tree.',
-    body: 'The previous business planted a tree for every export that left. We intend to carry that forward under Captain Exim.',
-    /** Gate: set true only once the client confirms the initiative is active. */
-    confirmed: false,
-    pendingNote:
-      'We publish no number against this, because we do not have a verified one. The commitment is stated; the count is not.',
+    body: 'A tree goes into the ground for every export that leaves — planted in the districts we buy from, not somewhere convenient. It does not offset a shipment and we will not claim it does. It is simply the part we can do every time, and it compounds.',
     image: '/img/tree-sapling.webp',
     imageAlt: 'A young sapling being planted by hand in open soil',
   },

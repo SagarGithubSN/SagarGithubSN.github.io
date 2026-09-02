@@ -21,8 +21,17 @@ import { brand, materials, nav } from '@/lib/content';
  * The two states share every transitioned property, so the change is a
  * crossfade rather than a switch.
  */
+/**
+ * Three states, not two.
+ *
+ *   film   at rest on the hero — no bar at all
+ *   veil   scrolling through the hero — a thin translucent bar
+ *   solid  the hero is behind you — the normal ivory bar
+ */
+type NavState = 'film' | 'veil' | 'solid';
+
 export function Nav() {
-  const [scrolled, setScrolled] = useState(false);
+  const [state, setState] = useState<NavState>('solid');
   const [open, setOpen] = useState(false); // products dropdown (desktop)
   const [menu, setMenu] = useState(false); // full menu (mobile)
   const pathname = usePathname();
@@ -31,30 +40,44 @@ export function Nav() {
   /**
    * Which state the bar is in.
    *
-   * The trigger is the hero itself, not a scroll distance. A fixed threshold
-   * flipped the bar to ivory after a single wheel click, while the film was
-   * still filling the screen behind it — the light bar then sat on the footage
-   * as an obvious rectangle. What actually matters is whether the *film* is
-   * still behind the bar, so the test is exactly that: the hero's bottom edge
-   * has risen past the bar's own height.
+   * The hero is bottom-aligned, so scrolling drives its headline and lede
+   * straight up underneath the navigation. With nothing between them the two
+   * sets of type overlap and read as one tangled block — ivory links sitting
+   * on an ivory headline. That is the collision this middle state exists to
+   * prevent.
    *
-   * A missed event here is not cosmetic: the hero treatment is ivory type on
-   * no background, so if the page reaches an ivory section while the bar still
-   * thinks it is over the film, the navigation becomes ivory on ivory —
-   * invisible. Scroll events can be coalesced or dropped, so a cheap 250ms
-   * backstop reads the geometry directly. Same reasoning as the reveal
-   * failsafe in `useReveal`.
+   * The bar is still completely absent at rest, which is the point of the
+   * treatment: at the top of the page the links float on the footage with no
+   * panel behind them. The veil only appears once the reader has actually
+   * started moving, when there is something to separate.
+   *
+   * The switch to the solid bar is driven by the hero's own bottom edge rather
+   * than a scroll distance, because what matters is whether the film is still
+   * behind the bar — a fixed threshold flipped it to ivory after one wheel
+   * click while the footage still filled the screen.
+   *
+   * A missed event here is not cosmetic: over the film the links are ivory on
+   * nothing, so if the page reaches an ivory section while the bar still thinks
+   * it is over the hero, the navigation becomes ivory on ivory — invisible.
+   * Scroll events can be coalesced or dropped, so a cheap 250ms backstop reads
+   * the geometry directly. Same reasoning as the failsafe in `useReveal`.
    */
   useEffect(() => {
     const NAV_H = 72; // h-[4.5rem]
+    /* Roughly two or three wheel clicks: past an accidental nudge, and well
+       before the hero's text has climbed anywhere near the bar. */
+    const VEIL_AT = 200;
+
     const sync = () => {
       const hero = document.getElementById('top');
-      // Routes without a film hero go light immediately on any movement.
+      // Routes without a film hero are solid from the first paint.
       if (!hero) {
-        setScrolled(window.scrollY > 24);
+        setState('solid');
         return;
       }
-      setScrolled(hero.getBoundingClientRect().bottom <= NAV_H);
+      if (hero.getBoundingClientRect().bottom <= NAV_H) setState('solid');
+      else if (window.scrollY > VEIL_AT) setState('veil');
+      else setState('film');
     };
     sync();
     window.addEventListener('scroll', sync, { passive: true });
@@ -103,20 +126,25 @@ export function Nav() {
    * ivory, so the light treatment applies from the first paint — no flash of
    * white-on-white. The open mobile sheet is ivory too, so it forces light.
    */
-  const overHero = pathname === '/' && !scrolled && !menu;
+  /* The mobile sheet is ivory, so an open menu forces the solid treatment
+     whatever the scroll position. */
+  const mode: NavState = pathname === '/' && !menu ? state : 'solid';
+
+  /* Both hero states put ivory type on the footage; only the ground differs. */
+  const onFilm = mode !== 'solid';
 
   // A whisper of shadow — enough to hold an edge against a bright sky frame,
   // not enough to read as a drop shadow.
-  const heroTextShadow = overHero ? '0 1px 10px rgba(0,0,0,0.18)' : undefined;
+  const heroTextShadow = onFilm ? '0 1px 10px rgba(0,0,0,0.18)' : undefined;
 
   /* The site's own ivory rather than a generic white — the same ground colour
      every other section uses, so the nav belongs to this brand and not to the
      video player. */
-  const linkColour = overHero ? 'text-[color:var(--color-ivory)]/90' : 'text-on-light-muted';
-  const linkActive = overHero ? 'text-[color:var(--color-ivory)]' : 'text-ink';
+  const linkColour = onFilm ? 'text-[color:var(--color-ivory)]/90' : 'text-on-light-muted';
+  const linkActive = onFilm ? 'text-[color:var(--color-ivory)]' : 'text-ink';
   /* Whole class names only — Tailwind cannot see a `hover:` prefix that is
      assembled inside a template literal at runtime. */
-  const linkHover = overHero
+  const linkHover = onFilm
     ? 'hover:text-[color:var(--color-ivory)]'
     : 'hover:text-ink';
 
@@ -124,11 +152,25 @@ export function Nav() {
     <header
       className="fixed inset-x-0 top-0 z-50 border-b transition-[background-color,border-color,backdrop-filter] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
       style={{
-        // Fully transparent over the film: the links float on the footage.
-        background: overHero ? 'transparent' : 'rgba(248,245,238,0.95)',
-        borderColor: overHero ? 'transparent' : 'var(--color-rule)',
-        backdropFilter: overHero ? 'none' : 'blur(10px)',
-        WebkitBackdropFilter: overHero ? 'none' : 'blur(10px)',
+        /* At rest: nothing at all, so the links read as part of the film.
+           Scrolling: the thinnest possible veil — 8% white and a blur. Enough
+           to stop the hero's own type showing through the navigation, far too
+           little to read as a panel laid over the footage.
+           Past the hero: the normal ivory bar. */
+        background:
+          mode === 'film'
+            ? 'transparent'
+            : mode === 'veil'
+              ? 'rgba(255,255,255,0.08)'
+              : 'rgba(248,245,238,0.95)',
+        borderColor:
+          mode === 'film'
+            ? 'transparent'
+            : mode === 'veil'
+              ? 'rgba(255,255,255,0.16)'
+              : 'var(--color-rule)',
+        backdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
+        WebkitBackdropFilter: mode === 'film' ? 'none' : 'blur(10px)',
       }}
     >
       <div className="shell flex h-[4.5rem] items-center justify-between gap-6">
@@ -139,7 +181,7 @@ export function Nav() {
         <Link
           href="/"
           className={`group flex shrink-0 flex-col justify-center transition-colors duration-500 ${
-            overHero ? 'text-[color:var(--color-ivory)]' : 'text-ink'
+            onFilm ? 'text-[color:var(--color-ivory)]' : 'text-ink'
           }`}
           style={{ textShadow: heroTextShadow }}
           aria-label={`${brand.name} — home`}
@@ -149,7 +191,7 @@ export function Nav() {
           </span>
           <span
             className={`mt-1 hidden whitespace-nowrap font-mono text-[0.5rem] uppercase leading-none tracking-[0.2em] xl:block transition-opacity duration-500 ${
-              overHero ? 'opacity-70' : 'opacity-55'
+              onFilm ? 'opacity-70' : 'opacity-55'
             }`}
           >
             {brand.promise}
@@ -229,13 +271,13 @@ export function Nav() {
               is behind you, in the same position. */}
           <Link
             href="/request-a-quote"
-            aria-hidden={overHero}
-            tabIndex={overHero ? -1 : 0}
+            aria-hidden={onFilm}
+            tabIndex={onFilm ? -1 : 0}
             className="btn btn-solid !px-6 !py-3 !text-[0.625rem] transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
-              opacity: overHero ? 0 : 1,
-              transform: overHero ? 'translateY(-0.4rem)' : 'none',
-              pointerEvents: overHero ? 'none' : 'auto',
+              opacity: onFilm ? 0 : 1,
+              transform: onFilm ? 'translateY(-0.4rem)' : 'none',
+              pointerEvents: onFilm ? 'none' : 'auto',
             }}
           >
             Request a quote
@@ -257,8 +299,8 @@ export function Nav() {
               style={{
                 top: menu ? '6px' : '0',
                 transform: menu ? 'rotate(45deg)' : 'none',
-                background: overHero ? 'var(--color-ivory)' : 'var(--color-ink)',
-                boxShadow: overHero ? '0 1px 6px rgba(0,0,0,0.22)' : undefined,
+                background: onFilm ? 'var(--color-ivory)' : 'var(--color-ink)',
+                boxShadow: onFilm ? '0 1px 6px rgba(0,0,0,0.22)' : undefined,
               }}
             />
             <span
@@ -266,8 +308,8 @@ export function Nav() {
               style={{
                 top: menu ? '6px' : '12px',
                 transform: menu ? 'rotate(-45deg)' : 'none',
-                background: overHero ? 'var(--color-ivory)' : 'var(--color-ink)',
-                boxShadow: overHero ? '0 1px 6px rgba(0,0,0,0.22)' : undefined,
+                background: onFilm ? 'var(--color-ivory)' : 'var(--color-ink)',
+                boxShadow: onFilm ? '0 1px 6px rgba(0,0,0,0.22)' : undefined,
               }}
             />
           </span>
