@@ -92,24 +92,59 @@ export function Hero() {
   const reduced = useReducedMotion();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [ready, setReady] = useState(false);
+  const [allowVideo, setAllowVideo] = useState(false);
 
   /**
-   * Start playback without depending on a media event arriving after React has
-   * attached its handlers. `loadeddata` and `canplay` can both fire before
-   * hydration on a warm cache, which would otherwise leave the video mounted,
-   * loaded, and invisible behind an opacity of 0.
+   * Decides whether to fetch the film at all.
    *
-   * So readiness is read from `readyState` directly, re-checked briefly, and
-   * play is retried on the first user gesture if the autoplay policy refused.
+   * It is 26 MB for fifteen seconds — a very high bitrate for 720p — and
+   * pushing that at someone on a metered or slow connection is indefensible
+   * when there is a perfectly good still of the same frame already loaded.
+   * Data Saver, and anything the browser classes as 2G, get the poster and
+   * nothing else. Read in an effect rather than during render because it is
+   * client-only and would not match the server's HTML.
+   */
+  useEffect(() => {
+    if (reduced) return;
+    type Conn = { saveData?: boolean; effectiveType?: string };
+    const conn = (navigator as Navigator & { connection?: Conn }).connection;
+    /* Only 4g and better. At 26 MB this file needs minutes on a 3g line, so
+       "not 2g" is the wrong bar — the browser's own estimate of 3g already
+       means the film would arrive long after the reader has gone. When the
+       API is unavailable we do not know, and load it. */
+    const slow = ['slow-2g', '2g', '3g'].includes(conn?.effectiveType ?? '');
+    const frugal = Boolean(conn?.saveData) || slow;
+    if (!frugal) setAllowVideo(true);
+  }, [reduced]);
+
+  /**
+   * Start playback, and only reveal the film once it can actually sustain it.
+   *
+   * This used to reveal at `readyState >= 2`. That constant means "the current
+   * frame is available", not "playback can continue" — so on any connection
+   * that could not keep ahead of a 14 Mbit/s file, the video faded in and then
+   * immediately ran the buffer dry, leaving a frozen frame on screen. It looked
+   * broken, and it was: the condition was answering a different question from
+   * the one being asked.
+   *
+   * The bar is now `HAVE_ENOUGH_DATA`, the browser's own estimate that it can
+   * play through without stalling, and a stall after that fades the still back
+   * over the top rather than leaving the picture stuck. On a slow line the
+   * outcome is simply the poster, which is a good photograph and an honest
+   * result.
+   *
+   * Readiness is still read from `readyState` directly and re-polled, because
+   * `loadeddata` and `canplay` can both fire before hydration on a warm cache,
+   * which would otherwise leave the video loaded and invisible at opacity 0.
    */
   useEffect(() => {
     const v = videoRef.current;
-    if (!v || reduced) return;
+    if (!v || reduced || !allowVideo) return;
     v.muted = true;
 
     let cancelled = false;
     const markReady = () => {
-      if (!cancelled && v.readyState >= 2) setReady(true);
+      if (!cancelled && v.readyState >= 4) setReady(true);
     };
     const attempt = () => {
       markReady();
@@ -117,14 +152,22 @@ export function Hero() {
         /* Autoplay refused. The poster stays, which is a fine outcome. */
       });
     };
+    // Buffer underrun: hand the frame back to the still until it recovers.
+    const onStall = () => {
+      if (!cancelled) setReady(false);
+    };
 
     attempt();
     v.addEventListener('loadeddata', attempt);
     v.addEventListener('canplay', attempt);
+    v.addEventListener('canplaythrough', attempt);
+    v.addEventListener('playing', markReady);
+    v.addEventListener('waiting', onStall);
+    v.addEventListener('stalled', onStall);
 
     // Covers the case where every event fired before hydration.
     const poll = window.setInterval(markReady, 250);
-    const stopPolling = window.setTimeout(() => window.clearInterval(poll), 6000);
+    const stopPolling = window.setTimeout(() => window.clearInterval(poll), 20000);
 
     // Last resort: a real gesture always satisfies the autoplay policy.
     const onGesture = () => attempt();
@@ -134,11 +177,15 @@ export function Hero() {
       cancelled = true;
       v.removeEventListener('loadeddata', attempt);
       v.removeEventListener('canplay', attempt);
+      v.removeEventListener('canplaythrough', attempt);
+      v.removeEventListener('playing', markReady);
+      v.removeEventListener('waiting', onStall);
+      v.removeEventListener('stalled', onStall);
       window.removeEventListener('pointerdown', onGesture);
       window.clearInterval(poll);
       window.clearTimeout(stopPolling);
     };
-  }, [reduced]);
+  }, [reduced, allowVideo]);
 
   return (
     <section
@@ -160,7 +207,7 @@ export function Hero() {
           style={{ filter: HERO_GRADE }}
         />
 
-        {!reduced ? (
+        {!reduced && allowVideo ? (
           <video
             ref={videoRef}
             className="absolute inset-0 h-full w-full object-cover object-[50%_45%] transition-opacity duration-1000"
@@ -174,7 +221,6 @@ export function Hero() {
             preload="auto"
             aria-hidden="true"
             tabIndex={-1}
-            onCanPlay={() => setReady(true)}
           />
         ) : null}
       </div>
